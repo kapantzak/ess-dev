@@ -282,3 +282,98 @@ describe("getHandlebarsData()", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("getPropsArray()", () => {
+  test("Returns the correct array of props when object has one property per level and last property value is null", () => {
+    const actual = helpers.getPropsArray({
+      prop1: {
+        prop2: {
+          prop3: null
+        }
+      }
+    });
+    const expected = ["prop1", "prop2", "prop3"];
+    expect(actual).toEqual(expected);
+  });
+
+  test("Returns the correct array of props when object has one property per level and last property value is an empty object", () => {
+    const actual = helpers.getPropsArray({
+      prop1: {
+        prop2: {
+          prop3: {}
+        }
+      }
+    });
+    const expected = ["prop1", "prop2", "prop3"];
+    expect(actual).toEqual(expected);
+  });
+
+  test("Returns the correct array of props when object has more than one properties per level", () => {
+    const actual = helpers.getPropsArray({
+      prop1: {
+        prop2: {
+          prop3: {}
+        },
+        prop4: null
+      }
+    });
+    const expected = ["prop1", "prop2", "prop3"];
+    expect(actual).toEqual(expected);
+  });
+
+  test("Returns empty array of props when object is empty", () => {
+    const actual = helpers.getPropsArray({});
+    const expected = [];
+    expect(actual).toEqual(expected);
+  });
+});
+
+// describe("getTreeObjectFileName()", () => {
+//   test("Return the provided file name if error is undefined", () => {
+//     const actual = helpers.getTreeObjectFileName("testForm.ts");
+//     const expected = "testForm.ts";
+//     expect(actual).toBe(expected);
+//   });
+
+//   test("Return the provided file name if error is null", () => {
+//     const actual = helpers.getTreeObjectFileName("testForm.ts", null);
+//     const expected = "testForm.ts";
+//     expect(actual).toBe(expected);
+//   });
+
+//   test("Return the provided file name if error is false", () => {
+//     const actual = helpers.getTreeObjectFileName("testForm.ts", false);
+//     const expected = "testForm.ts";
+//     expect(actual).toBe(expected);
+//   });
+
+//   test("Return the provided file name with error message if error is true", () => {
+//     const actual = helpers.getTreeObjectFileName("testForm.ts", true);
+//     const expected = "testForm.ts --> NOT CREATED";
+//     expect(actual).toBe(expected);
+//   });
+
+//   test("Throws error if file name is undefined", () => {
+//     expect(() => {
+//       helpers.getTreeObjectFileName();
+//     }).toThrow();
+//   });
+
+//   test("Throws error if file name is null", () => {
+//     expect(() => {
+//       helpers.getTreeObjectFileName(null);
+//     }).toThrow();
+//   });
+
+//   test("Throws error if file name is false", () => {
+//     expect(() => {
+//       helpers.getTreeObjectFileName(false);
+//     }).toThrow();
+//   });
+
+//   test("Throws error if file name is empty string", () => {
+//     expect(() => {
+//       helpers.getTreeObjectFileName("");
+//     }).toThrow();
+//   });
+// });

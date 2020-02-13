@@ -20,7 +20,8 @@ const init = async () => {
 
   const answers = await qst.introQuestions();
   if (answers && answers.confirmation) {
-    const data = helpers.getHandlebarsData(answers.formName);
+    const formName = answers.formName;
+    const data = helpers.getHandlebarsData(formName);
 
     let treeObj = {};
     let warnings = 0;
@@ -29,26 +30,22 @@ const init = async () => {
     // Script ------------------------------------------ //
 
     const config_script = config.instructions.script[0];
+    const config_script_out = config_script.output(formName);
     const resp_script = await compile.compileFromTemplate(
       config_script.template,
       data,
-      config_script.output("script.ts")
+      config_script_out.filePath
     );
     logs.push(resp_script.response);
 
     if (!resp_script.success) warnings++;
 
-    const resp_script_fileName = resp_script.success
-      ? "script.js"
-      : ">> script.js << NOT CREATED";
+    // const resp_script_fileName = resp_script.success
+    //   ? config_script_out.fileName
+    //   : `${config_script_out.fileName} --> NOT CREATED`;
 
-    treeObj = Object.assign({}, treeObj, {
-      src: {
-        pageScripts: {
-          [resp_script_fileName]: null
-        }
-      }
-    });
+    if (resp_script.success)
+      treeObj = Object.assign({}, treeObj, config_script_out.treeObj);
 
     const final =
       warnings > 0
