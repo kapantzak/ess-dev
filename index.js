@@ -38,10 +38,13 @@ const init = async () => {
     );
     logs.push(resp_script.response);
 
-    if (!resp_script.success) warnings++;
-
-    if (resp_script.success)
+    if (resp_script.success) {
       treeObj = Object.assign({}, treeObj, config_script_out.treeObj);
+    } else {
+      warnings++;
+    }
+
+    // ------------------------------------------------- //
 
     const final =
       warnings > 0
@@ -49,7 +52,7 @@ const init = async () => {
         : report.reportSuccess("Success");
     console.log(final);
 
-    const tree = chalk.blueBright(treeify.asTree(treeObj));
+    const tree = chalk.gray(treeify.asTree(treeObj));
     console.log(tree);
 
     logs.forEach(x => {
