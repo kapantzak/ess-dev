@@ -1,0 +1,1 @@
+<%@ WebHandler Language="C#" CodeBehind="{{asyncHandler.name}}.ashx.cs" Class="eStudio.Async.{{asyncHandler.name}}" %>
