@@ -40,10 +40,6 @@ const init = async () => {
 
     if (!resp_script.success) warnings++;
 
-    // const resp_script_fileName = resp_script.success
-    //   ? config_script_out.fileName
-    //   : `${config_script_out.fileName} --> NOT CREATED`;
-
     if (resp_script.success)
       treeObj = Object.assign({}, treeObj, config_script_out.treeObj);
 
