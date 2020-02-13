@@ -1,4 +1,4 @@
-const path = require("path");
+// const path = require("path");
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
@@ -16,25 +16,11 @@ const init = async () => {
   const title = chalk.blueBright(
     figlet.textSync("ESS DEV", { horizontalLayout: "full" })
   );
-
   console.log(title);
 
   const answers = await qst.introQuestions();
-
   if (answers && answers.confirmation) {
-    const data = {
-      form: {
-        name: answers.formName,
-        date: helpers.getDateFormatted(new Date())
-      },
-      asyncHandler: {
-        name: "testControl"
-      },
-      asyncHelper: {
-        fileName: "testAsync",
-        className: "TestAsync"
-      }
-    };
+    const data = helpers.getHandlebarsData(answers.formName);
 
     let treeObj = {};
     let warnings = 0;

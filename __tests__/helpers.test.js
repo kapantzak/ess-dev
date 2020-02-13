@@ -66,6 +66,50 @@ describe("getCamelCaseFormName()", () => {
   });
 });
 
+describe("getFormFileName()", () => {
+  test("Returns the correct front file name when 'classFile' is not provided", () => {
+    const actual = helpers.getFormFileName("ucTestForm");
+    const expected = "ucTestForm.ascx";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns the correct backend file name when 'classFile' is true", () => {
+    const actual = helpers.getFormFileName("ucTestForm", true);
+    const expected = "ucTestForm.ascx.cs";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns null if name is undefined", () => {
+    const actual = helpers.getFormFileName(undefined);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is undefined and 'classFile' is true", () => {
+    const actual = helpers.getFormFileName(undefined, true);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is null", () => {
+    const actual = helpers.getFormFileName(null);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is null and 'classFile' is true", () => {
+    const actual = helpers.getFormFileName(null, true);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is empty string", () => {
+    const actual = helpers.getFormFileName("");
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is empty string and 'classFile' is true", () => {
+    const actual = helpers.getFormFileName("", true);
+    expect(actual).toBeNull();
+  });
+});
+
 describe("getAsyncHelperFileName()", () => {
   test("Return the correct file name", () => {
     const actual = helpers.getAsyncHelperFileName("ucTestForm");
@@ -85,6 +129,29 @@ describe("getAsyncHelperFileName()", () => {
 
   test("Returns null if name is empty string", () => {
     const actual = helpers.getAsyncHelperFileName("");
+    expect(actual).toBeNull();
+  });
+});
+
+describe("getAsyncHelperClassName()", () => {
+  test("Return the correct class name", () => {
+    const actual = helpers.getAsyncHelperClassName("ucTestForm");
+    const expected = "AsyncTestForm";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns null if name is undefined", () => {
+    const actual = helpers.getAsyncHelperClassName(undefined);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is null", () => {
+    const actual = helpers.getAsyncHelperClassName(null);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is empty string", () => {
+    const actual = helpers.getAsyncHelperClassName("");
     expect(actual).toBeNull();
   });
 });
@@ -112,46 +179,83 @@ describe("getStateHelperFileName()", () => {
   });
 });
 
-describe("getAsyncHandlerFrontFileName()", () => {
+describe("getAsyncHandlerFileName()", () => {
   test("Returns the correct front file name when 'classFile' is not provided", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName("ucTestForm");
+    const actual = helpers.getAsyncHandlerFileName("ucTestForm");
     const expected = "testForm.ashx";
     expect(actual).toBe(expected);
   });
 
-  test("Returns the correct front file name when 'classFile' is true", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName("ucTestForm", true);
+  test("Returns the correct class file name when 'classFile' is true", () => {
+    const actual = helpers.getAsyncHandlerFileName("ucTestForm", true);
     const expected = "testForm.ashx.cs";
     expect(actual).toBe(expected);
   });
 
   test("Returns null if name is undefined", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName(undefined);
+    const actual = helpers.getAsyncHandlerFileName(undefined);
     expect(actual).toBeNull();
   });
 
   test("Returns null if name is undefined and 'classFile' is true", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName(undefined, true);
+    const actual = helpers.getAsyncHandlerFileName(undefined, true);
     expect(actual).toBeNull();
   });
 
   test("Returns null if name is null", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName(null);
+    const actual = helpers.getAsyncHandlerFileName(null);
     expect(actual).toBeNull();
   });
 
   test("Returns null if name is null and 'classFile' is true", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName(null, true);
+    const actual = helpers.getAsyncHandlerFileName(null, true);
     expect(actual).toBeNull();
   });
 
   test("Returns null if name is empty string", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName("");
+    const actual = helpers.getAsyncHandlerFileName("");
     expect(actual).toBeNull();
   });
 
   test("Returns null if name is empty string and 'classFile' is true", () => {
-    const actual = helpers.getAsyncHandlerFrontFileName("", true);
+    const actual = helpers.getAsyncHandlerFileName("", true);
     expect(actual).toBeNull();
+  });
+});
+
+describe("getHandlebarsData()", () => {
+  test("Returns the correct object", () => {
+    const actual = helpers.getHandlebarsData(
+      "ucTestForm",
+      new Date(2020, 1, 13)
+    );
+    const expected = {
+      form: {
+        name: "ucTestForm",
+        date: "13/2/2020",
+        front: {
+          name: "ucTestForm.ascx"
+        },
+        backend: {
+          name: "ucTestForm.ascx.cs"
+        }
+      },
+      asyncHandler: {
+        front: {
+          name: "testForm.ashx"
+        },
+        classFile: {
+          name: "testForm.ashx.cs"
+        }
+      },
+      asyncHelper: {
+        name: "asyncTestForm.ts",
+        className: "AsyncTestForm"
+      },
+      stateHelper: {
+        name: "state_testForm.ts"
+      }
+    };
+    expect(actual).toEqual(expected);
   });
 });
