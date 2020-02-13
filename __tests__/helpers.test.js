@@ -110,6 +110,29 @@ describe("getFormFileName()", () => {
   });
 });
 
+describe("getScriptFileName()", () => {
+  test("Returns the correct file name", () => {
+    const actual = helpers.getScriptFileName("ucTestForm");
+    const expected = "testForm.ts";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns null if name is undefined", () => {
+    const actual = helpers.getScriptFileName(undefined);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is null", () => {
+    const actual = helpers.getScriptFileName(null);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is empty string", () => {
+    const actual = helpers.getScriptFileName("");
+    expect(actual).toBeNull();
+  });
+});
+
 describe("getAsyncHelperFileName()", () => {
   test("Return the correct file name", () => {
     const actual = helpers.getAsyncHelperFileName("ucTestForm");
