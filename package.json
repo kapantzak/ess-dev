@@ -4,7 +4,8 @@
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "reset-out": "node ./devTools/helpers.js"
   },
   "author": "John Kapantzakis",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "treeify": "^1.1.0"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "rimraf": "^3.0.2"
   }
 }

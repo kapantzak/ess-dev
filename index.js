@@ -1,9 +1,11 @@
-// const path = require("path");
+const fs = require("fs");
+const path = require("path");
 const argv = require("minimist")(process.argv.slice(2));
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
 const treeify = require("treeify");
+const files = require("./lib/files");
 
 const config = require("./lib/config");
 const options = config.options;
@@ -43,52 +45,55 @@ const init = async () => {
         formName: argv[options.formName]
       });
     }
-    console.log(answers);
+
     const formName = answers.formName;
+    const useControlFileOutput = config.instructions.userControl[0].output(
+      formName
+    );
+    if (fs.existsSync(useControlFileOutput.filePath)) {
+      const err = report.reportError(
+        "File exists",
+        `File ${useControlFileOutput.fileName} already exists. Terminating job.`
+      );
+      console.log(err);
+      process.exit(1);
+    }
+
     const data = helpers.getHandlebarsData(formName);
 
     let treeObj = {};
     let warnings = 0;
     const logs = [];
 
-    // User control ------------------------------------ //
+    for await (const x of Object.entries(config.instructions)) {
+      const key = x[0];
+      if (
+        ((key === "asyncHandler" || key === "asyncHelper") &&
+          !answers.asyncHandler) ||
+        (key === "stateHelper" && !answers.stateHelper)
+      ) {
+        return;
+      }
+      const arr = x[1];
+      for (const obj of arr) {
+        const out = obj.output(formName);
+        if (key === "models") {
+          files.createModelsFolder(out.filePath);
+        }
+        const resp = await compile.compileFromTemplate(
+          obj.template,
+          data,
+          out.filePath
+        );
+        logs.push(resp.response);
 
-    // const config_userControl = config.instructions.userControl[0];
-    // const config_userControl_out = config_userControl.output(formName);
-    // console.log(config_userControl_out);
-    // const resp_userControl = await compile.compileFromTemplate(
-    //   config_userControl.template,
-    //   data,
-    //   config_userControl.filePath
-    // );
-    // logs.push(resp_userControl.response);
-
-    // if (resp_userControl.success) {
-    //   treeObj = Object.assign({}, treeObj, config_userControl_out.treeObj);
-    // } else {
-    //   warnings++;
-    // }
-
-    // ------------------------------------------------- //
-
-    // Script ------------------------------------------ //
-
-    const config_script = config.instructions.script[0];
-    const config_script_out = config_script.output(formName);
-    const resp_script = await compile.compileFromTemplate(
-      config_script.template,
-      data,
-      config_script_out.filePath
-    );
-    logs.push(resp_script.response);
-
-    if (resp_script.success) {
-      treeObj = Object.assign({}, treeObj, config_script_out.treeObj);
-    } else {
-      warnings++;
+        if (resp.success) {
+          treeObj = helpers.objectMutator(treeObj, out.treeObj);
+        } else {
+          warnings++;
+        }
+      }
     }
-
-    // ------------------------------------------------- //
 
     const final =
       warnings > 0

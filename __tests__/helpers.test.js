@@ -202,6 +202,38 @@ describe("getStateHelperFileName()", () => {
   });
 });
 
+describe("getModelsFolderName()", () => {
+  test("Return the correct folder name", () => {
+    const actual = helpers.getModelsFolderName("ucTestForm");
+    const expected = "TestForm";
+    expect(actual).toBe(expected);
+  });
+
+  test("Throws error for form name 'uc'", () => {
+    expect(() => {
+      helpers.getModelsFolderName("uc");
+    }).toThrow();
+  });
+
+  test("Throws error for form name ''", () => {
+    expect(() => {
+      helpers.getModelsFolderName("");
+    }).toThrow();
+  });
+
+  test("Throws error for null form name", () => {
+    expect(() => {
+      helpers.getModelsFolderName(null);
+    }).toThrow();
+  });
+
+  test("Throws error for undefined form name", () => {
+    expect(() => {
+      helpers.getModelsFolderName(undefined);
+    }).toThrow();
+  });
+});
+
 describe("getAsyncHandlerFileName()", () => {
   test("Returns the correct front file name when 'classFile' is not provided", () => {
     const actual = helpers.getAsyncHandlerFileName("ucTestForm");
@@ -255,6 +287,7 @@ describe("getHandlebarsData()", () => {
     const expected = {
       form: {
         name: "ucTestForm",
+        className: "TestForm",
         date: "13/2/2020",
         front: {
           name: "ucTestForm.ascx"
@@ -324,6 +357,58 @@ describe("getPropsArray()", () => {
   test("Returns empty array of props when object is empty", () => {
     const actual = helpers.getPropsArray({});
     const expected = [];
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("objectMutator()", () => {
+  test("Should add one property to empty object", () => {
+    const obj1 = {};
+    const obj2 = {
+      prop2: 2
+    };
+    const actual = helpers.objectMutator(obj1, obj2);
+    const expected = {
+      prop2: 2
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  test("Should add one property and preserve old", () => {
+    const obj1 = {
+      prop1: 1
+    };
+    const obj2 = {
+      prop2: 2
+    };
+    const actual = helpers.objectMutator(obj1, obj2);
+    const expected = {
+      prop1: 1,
+      prop2: 2
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  test("Should add one property to nested object", () => {
+    const obj1 = {
+      prop1: 1,
+      prop2: {
+        prop3: 3
+      }
+    };
+    const obj2 = {
+      prop2: {
+        prop4: 4
+      }
+    };
+    const actual = helpers.objectMutator(obj1, obj2);
+    const expected = {
+      prop1: 1,
+      prop2: {
+        prop3: 3,
+        prop4: 4
+      }
+    };
     expect(actual).toEqual(expected);
   });
 });
