@@ -1,7 +1,7 @@
 # ess-dev
 Boileplate code generation tool
 
-![cli_screen](https://github.com/kapantzak/ess-dev/assets/img/cli_screen.png)
+![cli_screen](https://github.com/kapantzak/ess-dev/blob/master/assets/img/cli_screen.png)
 
 ## Commands
 
