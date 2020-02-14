@@ -1,6 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require("fs");
-const path = require("path");
-const argv = require("minimist")(process.argv.slice(2));
+const yargs = require("yargs");
 const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
@@ -14,21 +15,38 @@ const qst = require("./lib/questions");
 const compile = require("./lib/compile");
 const report = require("./lib/report");
 const helpers = require("./lib/helpers");
-const validations = require("./lib/validations");
+
+const intro = chalk.blueBright(
+  figlet.textSync("ESS DEV", { horizontalLayout: "full" })
+);
 
 const init = async () => {
+  const argv = yargs
+    .usage("Usage -f <formName>")
+    .options("f", {
+      alias: "form",
+      describe: "The user control name to create (Prefixed with 'uc')",
+      type: "string",
+      demandOption: false
+    })
+    .command(
+      "init",
+      "Initialize a new form (user control, async handler, scripts, etc)",
+      {
+        form: {
+          alias: "f"
+        }
+      },
+      cmd => {
+        cmd_init(cmd);
+      }
+    )
+    .help().argv;
+};
+
+const cmd_init = async argv => {
   clear();
-
-  const title = chalk.blueBright(
-    figlet.textSync("ESS DEV", { horizontalLayout: "full" })
-  );
-  console.log(title);
-
-  const validation = validations.validateArguments(argv);
-  if (!validation.valid) {
-    validation.errors.forEach(x => console.log(x));
-    process.exit(1);
-  }
+  console.log(intro);
 
   const introAnswers = await qst.introQuestions(argv);
   const confirmationAnswers = await qst.confirmationQuestions(
@@ -47,9 +65,16 @@ const init = async () => {
     }
 
     const formName = answers.formName;
-    const useControlFileOutput = config.instructions.userControl[0].output(
-      formName
-    );
+    const userControlItem = config.instructions.userControl[0];
+    const useControlFileOutput = userControlItem.output(formName);
+    if (!files.directoryExists(userControlItem.template)) {
+      const err = report.reportError(
+        "Folder missing",
+        "Templates folder missing"
+      );
+      console.log(err);
+      process.exit(1);
+    }
     if (fs.existsSync(useControlFileOutput.filePath)) {
       const err = report.reportError(
         "File exists",
@@ -110,6 +135,11 @@ const init = async () => {
   } else {
     process.exit();
   }
+};
+
+const cmd_add = cmd => {
+  console.log(intro);
+  console.log("ADD --> Item");
 };
 
 init();

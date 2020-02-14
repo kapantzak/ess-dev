@@ -37,31 +37,3 @@ describe("validateUserControlName()", () => {
     expect(actual).toBe(false);
   });
 });
-
-describe("validateArguments()", () => {
-  test("Return valid if no arguments passed", () => {
-    const actual = validations.validateArguments();
-    expect(actual).toEqual({
-      valid: true,
-      errors: []
-    });
-  });
-
-  test(`Return valid for --${options.formName} ucTestForm`, () => {
-    const actual = validations.validateArguments({
-      [options.formName]: "ucTestForm"
-    });
-    expect(actual).toEqual({
-      valid: true,
-      errors: []
-    });
-  });
-
-  test(`Return invalid for --${options.formName} TestForm`, () => {
-    const actual = validations.validateArguments({
-      [options.formName]: "TestForm"
-    });
-    expect(actual.valid).toBe(false);
-    expect(actual.errors).toHaveLength(1);
-  });
-});
