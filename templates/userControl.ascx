@@ -4,7 +4,7 @@
 
 <div id="div_{{form.name}}">
 
-    <asp:HiddenField ID="Hidden_ReduxState" runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="Hidden_InitialState_{{form.name}}" runat="server" ClientIDMode="Static" />
     
     <%--Filters--%>
     <div id="filtersHolder" runat="server" class="row" ClientIDMode="Static">

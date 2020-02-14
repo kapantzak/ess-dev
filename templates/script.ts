@@ -4,29 +4,28 @@
  */
 
 import { Store, createStore } from 'redux';
+import { getHiddenFieldData, waitVisible } from '../helpers/genericHelpers';
 import {
   localizeKendo,
   getClientXStaticTranslation
 } from '../helpers/localizationHelper';
-import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.fileName}}';
+import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import '@progress/kendo-ui/js/kendo.all.js';
 import '@progress/kendo-ui/js/cultures/kendo.culture.el-GR.js';
-import * as stateHelper from '../reduxStates/state_assessmentForm';
+import * as stateHelper from '../reduxStates/{{stateHelper.import_name}}';
 import { parseDecodedJSON } from '../helpers/htmlHelper';
 import { getHiddenReduxStateSelector } from '../reduxStates/reduxHelpers';
 import {
   IAsyncResponse,
   AsyncResponseStatus
 } from '../asyncHelpers/generalAsyncHelper';
-import models = eStudio.classes.HttpRequestsDataModels.AssessmentForm;
+import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
 
 localizeKendo();
 
 const asyncHelper = new {{asyncHelper.className}}();
 
-let store: Store<models.AssessmentFormState> = null;
-
-let modals = null;
+let store: Store<models.State> = null;
 
 function initApp(): void {
   console.log('{{form.name}}');
@@ -39,12 +38,12 @@ function initApp(): void {
 function setInitialState(): boolean {
   const stateData = getHiddenFieldData(
     getHiddenReduxStateSelector(
-      'div_ucAssessmentForm',
-      '[id$=Hidden_InitialState_ucAssessmentForm]'
+      'div_{{form.name}}',
+      '[id$=Hidden_InitialState_{{form.name}}]'
     )
   );
   if (stateData && stateData.length > 0) {
-    const initialState: models.AssessmentFormState = parseDecodedJSON(
+    const initialState: models.State = parseDecodedJSON(
       stateData
     );
     store = createStore(stateHelper.appReducer, initialState);
@@ -52,3 +51,7 @@ function setInitialState(): boolean {
   }
   return false;
 }
+
+$(window).load(() => {
+  initApp();
+});

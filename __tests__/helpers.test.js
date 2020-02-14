@@ -247,6 +247,12 @@ describe("getAsyncHandlerFileName()", () => {
     expect(actual).toBe(expected);
   });
 
+  test("Returns the correct name when 'extension' is false", () => {
+    const actual = helpers.getAsyncHandlerFileName("ucTestForm", true, false);
+    const expected = "testForm";
+    expect(actual).toBe(expected);
+  });
+
   test("Returns null if name is undefined", () => {
     const actual = helpers.getAsyncHandlerFileName(undefined);
     expect(actual).toBeNull();
@@ -297,6 +303,7 @@ describe("getHandlebarsData()", () => {
         }
       },
       asyncHandler: {
+        name: "testForm",
         front: {
           name: "testForm.ashx"
         },
@@ -306,10 +313,12 @@ describe("getHandlebarsData()", () => {
       },
       asyncHelper: {
         name: "asyncTestForm.ts",
+        import_name: "asyncTestForm",
         className: "AsyncTestForm"
       },
       stateHelper: {
-        name: "state_testForm.ts"
+        name: "state_testForm.ts",
+        import_name: "state_testForm"
       }
     };
     expect(actual).toEqual(expected);

@@ -68,7 +68,7 @@ namespace eStudio
         private void SetInitialState()
         {
             var state = this.GetInitialState();
-            Hidden_ReduxState.Value = state.EncodeAndSerialize();
+            Hidden_InitialState_{{form.name}}.Value = state.EncodeAndSerialize();
         }
         
         private State GetInitialState()
