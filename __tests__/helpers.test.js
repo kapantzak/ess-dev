@@ -87,15 +87,21 @@ describe("getCamelCaseFormName()", () => {
 });
 
 describe("getFormFileName()", () => {
-  test("Returns the correct front file name when 'classFile' is not provided", () => {
+  test("Returns the front file name when type is not provided", () => {
     const actual = helpers.getFormFileName("ucTestForm");
     const expected = "ucTestForm.ascx";
     expect(actual).toBe(expected);
   });
 
-  test("Returns the correct backend file name when 'classFile' is true", () => {
-    const actual = helpers.getFormFileName("ucTestForm", true);
+  test("Returns the backend file name when type is 'codebehind'", () => {
+    const actual = helpers.getFormFileName("ucTestForm", "codebehind");
     const expected = "ucTestForm.ascx.cs";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns the designer file name when type is 'designer'", () => {
+    const actual = helpers.getFormFileName("ucTestForm", "designer");
+    const expected = "ucTestForm.ascx.designer.cs";
     expect(actual).toBe(expected);
   });
 
@@ -104,28 +110,13 @@ describe("getFormFileName()", () => {
     expect(actual).toBeNull();
   });
 
-  test("Returns null if name is undefined and 'classFile' is true", () => {
-    const actual = helpers.getFormFileName(undefined, true);
-    expect(actual).toBeNull();
-  });
-
   test("Returns null if name is null", () => {
     const actual = helpers.getFormFileName(null);
     expect(actual).toBeNull();
   });
 
-  test("Returns null if name is null and 'classFile' is true", () => {
-    const actual = helpers.getFormFileName(null, true);
-    expect(actual).toBeNull();
-  });
-
   test("Returns null if name is empty string", () => {
     const actual = helpers.getFormFileName("");
-    expect(actual).toBeNull();
-  });
-
-  test("Returns null if name is empty string and 'classFile' is true", () => {
-    const actual = helpers.getFormFileName("", true);
     expect(actual).toBeNull();
   });
 });
