@@ -12,6 +12,12 @@ Initialize a new form. Adds various files, depending on the options provided
 
 ## Options
 
+### --form (Alias: -f)
+`string` The user control name to be created
+
+### --output (Alias -o)
+`string` The output directory of the created files
+
 ### -d
 If provided, the default settings will be applied
 
@@ -19,8 +25,6 @@ If provided, the default settings will be applied
 - Async handler: Yes
 - State hepler: Yes
 
-### --form (Alias: -f)
-The user control name to be created
 
 ## Help
 

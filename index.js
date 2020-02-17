@@ -29,6 +29,12 @@ const init = async () => {
       type: "string",
       demandOption: false
     })
+    .options("o", {
+      alias: "output",
+      describe: "The output directory of the created files",
+      type: "string",
+      demandOption: false
+    })
     .command(
       "init",
       "Initialize a new form (user control, async handler, scripts, etc)",
@@ -65,7 +71,8 @@ const cmd_init = async argv => {
     }
 
     const formName = answers.formName;
-    const userControlItem = config.instructions.userControl[0];
+    const instructions = config.instructions(argv.o);
+    const userControlItem = instructions.userControl[0];
     const useControlFileOutput = userControlItem.output(formName);
     if (!files.directoryExists(userControlItem.template)) {
       const err = report.reportError(
@@ -90,7 +97,7 @@ const cmd_init = async argv => {
     let warnings = 0;
     const logs = [];
 
-    for await (const x of Object.entries(config.instructions)) {
+    for await (const x of Object.entries(instructions)) {
       const key = x[0];
       if (helpers.renderInstructionItem(key, answers)) {
         const arr = x[1];
