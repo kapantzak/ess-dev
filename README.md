@@ -1,5 +1,5 @@
 # ess-dev
-Boileplate code generation tool
+Project specific tool for automatic boileplate code generation
 
 ![cli_screen](https://github.com/kapantzak/ess-dev/blob/master/assets/img/cli_screen.png)
 
