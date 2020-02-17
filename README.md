@@ -20,7 +20,7 @@ Initialize a new form. Adds various files, depending on the options provided
 ### --output (Alias -o)
 `string` The output directory of the created files
 
-### -d
+### --default (Alias -d)
 If provided, the default settings will be applied
 
 - Form filters: Yes
