@@ -8,7 +8,7 @@
     "reset": "node ./devTools/helpers.js"
   },
   "bin": {
-    "ess-dev": "index.js"
+    "ess-dev": "lib/index.js"
   },
   "author": "John Kapantzakis",
   "license": "ISC",
