@@ -6,10 +6,12 @@
 
     <asp:HiddenField ID="Hidden_InitialState_{{form.name}}" runat="server" ClientIDMode="Static" />
     
+    {{#if answers.formFilters}}
     <%--Filters--%>
     <div id="filtersHolder" runat="server" class="row" ClientIDMode="Static">
         <div id="filters" class="container-fluid"></div>
     </div>
+    {{/if}}
 
     <%--No results--%>
     <div id="noResults"></div>

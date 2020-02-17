@@ -61,10 +61,13 @@ namespace eStudio
         // METHODS ==================================================================================== //
 
         private void InitApp()
-        {            
+        {
+            {{#if answers.stateHelper}}
             this.SetInitialState();
+            {{/if}}
         }
 
+        {{#if answers.stateHelper}}
         private void SetInitialState()
         {
             var state = this.GetInitialState();
@@ -79,6 +82,7 @@ namespace eStudio
                 UserRoles = this.userRoles.GetAllRoles()
             };
         }
+        {{/if}}
                         
         public void Localize()
         {

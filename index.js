@@ -84,7 +84,7 @@ const cmd_init = async argv => {
       process.exit(1);
     }
 
-    const data = helpers.getHandlebarsData(formName);
+    const data = helpers.getHandlebarsData(formName, answers);
 
     let treeObj = {};
     let warnings = 0;
@@ -92,30 +92,25 @@ const cmd_init = async argv => {
 
     for await (const x of Object.entries(config.instructions)) {
       const key = x[0];
-      if (
-        ((key === "asyncHandler" || key === "asyncHelper") &&
-          !answers.asyncHandler) ||
-        (key === "stateHelper" && !answers.stateHelper)
-      ) {
-        return;
-      }
-      const arr = x[1];
-      for (const obj of arr) {
-        const out = obj.output(formName);
-        if (key === "models") {
-          files.createModelsFolder(out.filePath);
-        }
-        const resp = await compile.compileFromTemplate(
-          obj.template,
-          data,
-          out.filePath
-        );
-        logs.push(resp.response);
+      if (helpers.renderInstructionItem(key, answers)) {
+        const arr = x[1];
+        for (const obj of arr) {
+          const out = obj.output(formName);
+          if (key === "models") {
+            files.createModelsFolder(out.filePath);
+          }
+          const resp = await compile.compileFromTemplate(
+            obj.template,
+            data,
+            out.filePath
+          );
+          logs.push(resp.response);
 
-        if (resp.success) {
-          treeObj = helpers.objectMutator(treeObj, out.treeObj);
-        } else {
-          warnings++;
+          if (resp.success) {
+            treeObj = helpers.objectMutator(treeObj, out.treeObj);
+          } else {
+            warnings++;
+          }
         }
       }
     }
@@ -135,11 +130,6 @@ const cmd_init = async argv => {
   } else {
     process.exit();
   }
-};
-
-const cmd_add = cmd => {
-  console.log(intro);
-  console.log("ADD --> Item");
 };
 
 init();

@@ -3,38 +3,47 @@
  * Date: {{form.date}}
  */
 
+{{#if answers.stateHelper}}
 import { Store, createStore } from 'redux';
+import * as stateHelper from '../reduxStates/{{stateHelper.import_name}}';
+import { getHiddenReduxStateSelector } from '../reduxStates/reduxHelpers';
+{{/if}}
 import { getHiddenFieldData, waitVisible } from '../helpers/genericHelpers';
 import {
   localizeKendo,
   getClientXStaticTranslation
 } from '../helpers/localizationHelper';
-import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import '@progress/kendo-ui/js/kendo.all.js';
 import '@progress/kendo-ui/js/cultures/kendo.culture.el-GR.js';
-import * as stateHelper from '../reduxStates/{{stateHelper.import_name}}';
 import { parseDecodedJSON } from '../helpers/htmlHelper';
-import { getHiddenReduxStateSelector } from '../reduxStates/reduxHelpers';
+{{#if answers.asyncHandler}}
+import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import {
   IAsyncResponse,
   AsyncResponseStatus
 } from '../asyncHelpers/generalAsyncHelper';
+{{/if}}
 import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
 
 localizeKendo();
 
 const asyncHelper = new {{asyncHelper.className}}();
 
+{{#if answers.stateHelper}}
 let store: Store<models.State> = null;
+{{/if}}
 
 function initApp(): void {
   console.log('{{form.name}}');
+  {{#if answers.stateHelper}}
   if (setInitialState()) {
     const state = store.getState();
     
   }
+  {{/if}}
 }
 
+{{#if answers.stateHelper}}
 function setInitialState(): boolean {
   const stateData = getHiddenFieldData(
     getHiddenReduxStateSelector(
@@ -51,6 +60,7 @@ function setInitialState(): boolean {
   }
   return false;
 }
+{{/if}}
 
 $(window).load(() => {
   initApp();

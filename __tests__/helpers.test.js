@@ -288,9 +288,11 @@ describe("getHandlebarsData()", () => {
   test("Returns the correct object", () => {
     const actual = helpers.getHandlebarsData(
       "ucTestForm",
+      undefined,
       new Date(2020, 1, 13)
     );
     const expected = {
+      answers: {},
       form: {
         name: "ucTestForm",
         className: "TestForm",
@@ -371,6 +373,18 @@ describe("getPropsArray()", () => {
 });
 
 describe("objectMutator()", () => {
+  test("Should add one property with null value to empty object", () => {
+    const obj1 = {};
+    const obj2 = {
+      prop2: null
+    };
+    const actual = helpers.objectMutator(obj1, obj2);
+    const expected = {
+      prop2: null
+    };
+    expect(actual).toEqual(expected);
+  });
+
   test("Should add one property to empty object", () => {
     const obj1 = {};
     const obj2 = {
@@ -419,5 +433,73 @@ describe("objectMutator()", () => {
       }
     };
     expect(actual).toEqual(expected);
+  });
+});
+
+describe("renderInstructionItem()", () => {
+  test("Returns true for key 'asyncHandler' and answer 'asyncHandler: true'", () => {
+    const actual = helpers.renderInstructionItem("asyncHandler", {
+      asyncHandler: true
+    });
+    expect(actual).toBe(true);
+  });
+
+  test("Returns false for key 'asyncHandler' and answer 'asyncHandler: false'", () => {
+    const actual = helpers.renderInstructionItem("asyncHandler", {
+      asyncHandler: false
+    });
+    expect(actual).toBe(false);
+  });
+
+  test("Returns true for key 'asyncHelper' and answer 'asyncHelper: true'", () => {
+    const actual = helpers.renderInstructionItem("asyncHelper", {
+      asyncHandler: true
+    });
+    expect(actual).toBe(true);
+  });
+
+  test("Returns false for key 'asyncHelper' and answer 'asyncHandler: false'", () => {
+    const actual = helpers.renderInstructionItem("asyncHelper", {
+      asyncHandler: false
+    });
+    expect(actual).toBe(false);
+  });
+
+  test("Returns true for key 'stateHelper' and answer 'stateHelper: true'", () => {
+    const actual = helpers.renderInstructionItem("stateHelper", {
+      stateHelper: true
+    });
+    expect(actual).toBe(true);
+  });
+
+  test("Returns false for key 'stateHelper' and answer 'stateHelper: false'", () => {
+    const actual = helpers.renderInstructionItem("stateHelper", {
+      stateHelper: false
+    });
+    expect(actual).toBe(false);
+  });
+
+  test("Returns true for key 'models' and answer 'stateHelper: true'", () => {
+    const actual = helpers.renderInstructionItem("models", {
+      stateHelper: true
+    });
+    expect(actual).toBe(true);
+  });
+
+  test("Returns false for key 'models' and answer 'stateHelper: false'", () => {
+    const actual = helpers.renderInstructionItem("models", {
+      stateHelper: false
+    });
+    expect(actual).toBe(false);
+  });
+
+  test("Returns true for key 'userControl'", () => {
+    const actual = helpers.renderInstructionItem("userControl", {});
+    expect(actual).toBe(true);
+  });
+
+  test("Returns true for key 'script'", () => {
+    const actual = helpers.renderInstructionItem("script", {});
+    expect(actual).toBe(true);
   });
 });
