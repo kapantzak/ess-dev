@@ -6,6 +6,26 @@ describe("getDateFormatted()", () => {
     const expected = "13/2/2020";
     expect(actual).toBe(expected);
   });
+
+  test("Returns null for undefined", () => {
+    const actual = helpers.getDateFormatted(undefined);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null for null", () => {
+    const actual = helpers.getDateFormatted(null);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null for false", () => {
+    const actual = helpers.getDateFormatted(false);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null for invalid date object", () => {
+    const actual = helpers.getDateFormatted({});
+    expect(actual).toBeNull();
+  });
 });
 
 describe("removeUcFromFormName()", () => {

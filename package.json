@@ -4,7 +4,7 @@
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "reset": "node ./devTools/helpers.js"
   },
   "bin": {
