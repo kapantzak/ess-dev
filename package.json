@@ -13,6 +13,7 @@
   },
   "author": "John Kapantzakis",
   "license": "ISC",
+  "private": false,
   "dependencies": {
     "chalk": "^3.0.0",
     "clear": "^0.1.0",
