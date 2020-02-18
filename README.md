@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/kapantzak/ess-dev.svg?token=syJknnbusTbGgY6qksas&branch=master)](https://travis-ci.com/kapantzak/ess-dev)
+
 # ess-dev
 Project specific tool for automatic boileplate code generation.
 
