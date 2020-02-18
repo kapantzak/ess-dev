@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/kapantzak/ess-dev.svg?token=syJknnbusTbGgY6qksas&branch=master)](https://travis-ci.com/kapantzak/ess-dev)
-
 [![Coverage Status](https://coveralls.io/repos/github/kapantzak/ess-dev/badge.svg?branch=master)](https://coveralls.io/github/kapantzak/ess-dev?branch=master)
 
 # ess-dev
