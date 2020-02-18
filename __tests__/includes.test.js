@@ -1,8 +1,8 @@
 const includes = require("../lib/includes");
 
-describe("getUserControlInclusion()", () => {
+describe("getUserControlInclusionCompile()", () => {
   test("Returns the expected items for the provided user control", () => {
-    const actual = includes.getUserControlInclusion("ucTestForm");
+    const actual = includes.getUserControlInclusionCompile("ucTestForm");
     const expected = [
       {
         _attributes: {
