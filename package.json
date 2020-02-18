@@ -4,6 +4,7 @@
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
+    "ess-dev": "node lib/index.js init -o output",
     "test": "jest --coverage",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "reset": "node ./devTools/helpers.js"
