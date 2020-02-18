@@ -1,6 +1,6 @@
 {
   "name": "ess-dev",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,13 @@
   "author": "John Kapantzakis",
   "license": "ISC",
   "private": false,
+  "keywords": [
+    "node",
+    "javascript",
+    "boilerplate",
+    "handlebars",
+    "templates"
+  ],
   "dependencies": {
     "chalk": "^3.0.0",
     "clear": "^0.1.0",

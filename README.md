@@ -5,7 +5,7 @@
 # ess-dev
 Project specific tool for automatic boileplate code generation.
 
-This tool is a node cli that is intended to be used as a development tool for specific ASP.NET/Typescript project. It uses [Handlebars](https://handlebarsjs.com/ "https://handlebarsjs.com/") in order to generate biolerplate code.
+This tool is a node cli that is intended to be used as a development tool for specific ASP.NET/Typescript project. It uses [Handlebars](https://handlebarsjs.com/ "https://handlebarsjs.com/") in order to generate boilerplate code.
 
 Feel free to fork the repo in order to customize the behaviour according to your needs.
 
