@@ -27,11 +27,14 @@ Initialize a new form. Adds various files, depending on the options provided
 `string` The output directory of the created files
 
 ### --default (Alias -d)
-If provided, the default settings will be applied
+`boolean` If provided, the default settings will be applied
 
 - Form filters: Yes
 - Async handler: Yes
 - State hepler: Yes
+
+### --include (Alias -i)
+`boolean` If provided, new files are included in project (Currently in test)
 
 
 ## Help

@@ -9,19 +9,13 @@ import * as stateHelper from '../reduxStates/{{stateHelper.import_name}}';
 import { getHiddenReduxStateSelector } from '../reduxStates/reduxHelpers';
 {{/if}}
 import { getHiddenFieldData, waitVisible } from '../helpers/genericHelpers';
-import {
-  localizeKendo,
-  getClientXStaticTranslation
-} from '../helpers/localizationHelper';
+import { localizeKendo, getClientXStaticTranslation } from '../helpers/localizationHelper';
 import '@progress/kendo-ui/js/kendo.all.js';
 import '@progress/kendo-ui/js/cultures/kendo.culture.el-GR.js';
 import { parseDecodedJSON } from '../helpers/htmlHelper';
 {{#if answers.asyncHandler}}
 import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
-import {
-  IAsyncResponse,
-  AsyncResponseStatus
-} from '../asyncHelpers/generalAsyncHelper';
+import { IAsyncResponse, AsyncResponseStatus } from '../asyncHelpers/generalAsyncHelper';
 {{/if}}
 import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
 
