@@ -34,7 +34,13 @@ Initialize a new form. Adds various files, depending on the options provided
 - State hepler: Yes
 
 ### --include (Alias -i)
-`boolean` If provided, new files are included in project (Currently in test)
+`string` The csproj file name to update
+
+### --callback (Alias -c)
+`string` The executable to be called provided with two arguments
+
+- The project file name
+- A JSON with the items to be included
 
 
 ## Help

@@ -1,6 +1,6 @@
 {
   "name": "ess-dev",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,10 @@
   "bin": {
     "ess-dev": "lib/index.js"
   },
+  "files": [
+    "lib",
+    "templates"
+  ],
   "author": "John Kapantzakis",
   "license": "ISC",
   "private": false,

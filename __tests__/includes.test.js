@@ -8,22 +8,16 @@ describe("Compile", () => {
       const expected = [
         {
           unevaluatedInclude: `${formName}.ascx.cs`,
-          metadata: [
-            {
-              DependentUpon: `${formName}.ascx`
-            },
-            {
-              SubType: "ASPXCodeBehind"
-            }
-          ]
+          metadata: {
+            DependentUpon: `${formName}.ascx`,
+            SubType: "ASPXCodeBehind"
+          }
         },
         {
           unevaluatedInclude: `${formName}.ascx.designer.cs`,
-          metadata: [
-            {
-              DependentUpon: `${formName}.ascx`
-            }
-          ]
+          metadata: {
+            DependentUpon: `${formName}.ascx`
+          }
         }
       ];
       expect(actual).toEqual(expected);
@@ -36,11 +30,9 @@ describe("Compile", () => {
       const expected = [
         {
           unevaluatedInclude: `Async\\testForm.ashx.cs`,
-          metadata: [
-            {
-              DependentUpon: `testForm.ashx`
-            }
-          ]
+          metadata: {
+            DependentUpon: `testForm.ashx`
+          }
         }
       ];
       expect(actual).toEqual(expected);
@@ -136,28 +128,22 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "Content",
         unevaluatedInclude: `${formName}.ascx`,
-        metadata: []
+        metadata: null
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `${formName}.ascx.cs`,
-        metadata: [
-          {
-            DependentUpon: `${formName}.ascx`
-          },
-          {
-            SubType: "ASPXCodeBehind"
-          }
-        ]
+        metadata: {
+          DependentUpon: `${formName}.ascx`,
+          SubType: "ASPXCodeBehind"
+        }
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `${formName}.ascx.designer.cs`,
-        metadata: [
-          {
-            DependentUpon: `${formName}.ascx`
-          }
-        ]
+        metadata: {
+          DependentUpon: `${formName}.ascx`
+        }
       }
     ];
     expect(actual).toEqual(expected);
@@ -169,7 +155,7 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "TypeScriptCompile",
         unevaluatedInclude: `src\\pageScripts\\testForm.ts`,
-        metadata: []
+        metadata: null
       }
     ];
     expect(actual).toEqual(expected);
@@ -181,7 +167,7 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "TypeScriptCompile",
         unevaluatedInclude: `src\\asyncHelpers\\asyncTestForm.ts`,
-        metadata: []
+        metadata: null
       }
     ];
     expect(actual).toEqual(expected);
@@ -193,7 +179,7 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "TypeScriptCompile",
         unevaluatedInclude: `src\\reduxStates\\state_testForm.ts`,
-        metadata: []
+        metadata: null
       }
     ];
     expect(actual).toEqual(expected);
@@ -205,16 +191,14 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "Content",
         unevaluatedInclude: `Async\\testForm.ashx`,
-        metadata: []
+        metadata: null
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `Async\\testForm.ashx.cs`,
-        metadata: [
-          {
-            DependentUpon: `testForm.ashx`
-          }
-        ]
+        metadata: {
+          DependentUpon: `testForm.ashx`
+        }
       }
     ];
     expect(actual).toEqual(expected);
@@ -226,22 +210,22 @@ describe("includeInProjectFile()", () => {
       {
         itemType: "Compile",
         unevaluatedInclude: `classes\\HttpRequestsDataModels\\TestForm\\State.cs`,
-        metadata: []
+        metadata: null
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `classes\\HttpRequestsDataModels\\TestForm\\Filters.cs`,
-        metadata: []
+        metadata: null
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `classes\\HttpRequestsDataModels\\TestForm\\RequestParams.cs`,
-        metadata: []
+        metadata: null
       },
       {
         itemType: "Compile",
         unevaluatedInclude: `classes\\HttpRequestsDataModels\\TestForm\\Results.cs`,
-        metadata: []
+        metadata: null
       }
     ];
     expect(actual).toEqual(expected);
