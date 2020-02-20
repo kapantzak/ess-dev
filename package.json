@@ -1,6 +1,6 @@
 {
   "name": "ess-dev",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,6 @@
     "inquirer": "^7.0.4",
     "log-symbols": "^3.0.0",
     "treeify": "^1.1.0",
-    "xml-js": "^1.6.11",
     "yargs": "^15.1.0"
   },
   "devDependencies": {
