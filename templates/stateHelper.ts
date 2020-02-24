@@ -2,7 +2,7 @@
 //  Date: {{form.date}}
 //  Control name: '{{form.name}}'
 
-import * as reduxHelpers from "../reduxStates/reduxHelpers";
+import * as reduxHelpers from '../reduxStates/reduxHelpers';
 import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
 
 // REDUCERS ============================================================================== //
