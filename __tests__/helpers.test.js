@@ -332,7 +332,8 @@ describe("getHandlebarsData()", () => {
       stateHelper: {
         name: "state_testForm.ts",
         import_name: "state_testForm"
-      }
+      },
+      userControlHelper: null
     };
     expect(actual).toEqual(expected);
   });
@@ -512,5 +513,19 @@ describe("renderInstructionItem()", () => {
   test("Returns true for key 'script'", () => {
     const actual = helpers.renderInstructionItem("script", {});
     expect(actual).toBe(true);
+  });
+});
+
+describe("getStoredProcMethodParamName()", () => {
+  test.each([
+    ["@Param1", "param1"],
+    ["@ParamOne", "paramOne"]
+  ])("Returns '%s' when provided with '%s'", (sqlName, expected) => {
+    const actual = helpers.getStoredProcMethodParamName(sqlName);
+    expect(actual).toBe(expected);
+  });
+
+  test.each(["", "@"])("Must throw error when provided with '%s'", sqlName => {
+    expect(() => helpers.getStoredProcMethodParamName(sqlName)).toThrow();
   });
 });

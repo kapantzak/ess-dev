@@ -42,6 +42,45 @@ Initialize a new form. Adds various files, depending on the options provided
 - The project file name
 - A JSON with the items to be included
 
+## Configuration file
+
+If `essdev.config.js` exists in the root folder, the tool will try to read form it and will not ask any questions.
+
+### Example
+
+	module.exports = {
+	  formName: "ucTestForm",
+	  formFilters: true,
+	  asyncHandler: true,
+	  stateHelper: true,
+	  userControlHelper: {
+	    mainData: {
+	      storedProc: {
+	        name: "XD_Test_StoredProc",
+	        params: [
+	          {
+	            name: "@Param1",
+	            type: "int"
+	          },
+	          {
+	            name: "@Param2",
+	            type: "string"
+	          },
+	          {
+	            name: "@CurrentUserID",
+	            isCurrentUser: true
+	          },
+	          {
+	            name: "@CurrentLanguageID",
+	            isCurrentLanguage: true
+	          }
+	        ],
+	        returnDataSet: true
+	      }
+	    }
+	  }
+	};
+
 
 ## Help
 

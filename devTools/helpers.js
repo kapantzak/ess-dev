@@ -49,6 +49,9 @@ const rebuildOutput = () => {
     if (files.directoryExists(classes)) {
       const models = path.join(classes, "HttpRequestsDataModels");
       fs.mkdirSync(models);
+
+      const userControlHelper = path.join(classes, "UserControlHelpers");
+      fs.mkdirSync(userControlHelper);
     }
   }
 };
