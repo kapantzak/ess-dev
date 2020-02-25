@@ -12,7 +12,7 @@ namespace eStudio.classes.UserControlHelpers
     {
         public static {{userControlHelper.mainData.storedProc.returnType}} GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
         {
-            {{#if userControlHelper.mainData.storedProc.returnDataSet}}
+            {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
             var ds = new DataSet("Data");            
             {{else}}
             var dt = new DataTable();
@@ -38,7 +38,7 @@ namespace eStudio.classes.UserControlHelpers
                 var da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
 
-                {{#if userControlHelper.mainData.storedProc.returnDataSet}}
+                {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
                 da.Fill(ds);
                 return ds;                
                 {{else}}
