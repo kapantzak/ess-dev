@@ -38,7 +38,7 @@ module.exports = {
               fields: [
                 {
                   name: "ContactID",
-                  type: "int"
+                  type: "int?"
                 },
                 {
                   name: "Employee",
@@ -50,7 +50,7 @@ module.exports = {
               fields: [
                 {
                   name: "ID",
-                  type: "int"
+                  type: "int?"
                 },
                 {
                   name: "Descr",

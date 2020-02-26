@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace eStudio.classes.HttpRequestsDataModels.{{name}}
+namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
 {
     [ExportToTypescript]
-    public class {{name}}
+    public class {{dataModel.name}}
     {
-           
+        {{#each dataModel.props}}
+        public {{this.type}} {{this.name}} { get; set; }
+        {{/each}}
     }
 }

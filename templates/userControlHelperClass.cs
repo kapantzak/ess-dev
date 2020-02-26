@@ -10,7 +10,11 @@ namespace eStudio.classes.UserControlHelpers
 {
     public static class {{form.className}}
     {
-        public static {{userControlHelper.mainData.storedProc.returnType}} GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
+        public static DataSet GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        {{else}}
+        public static DataTable GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        {{/if}}
         {
             {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
             var ds = new DataSet("Data");            
