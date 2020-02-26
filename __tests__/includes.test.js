@@ -231,6 +231,18 @@ describe("includeInProjectFile()", () => {
     expect(actual).toEqual(expected);
   });
 
+  test("Includes user control helper in classes/UserControlHelpers/ folder", () => {
+    const actual = includes.includeInProjectFile("userControlHelper", formName);
+    const expected = [
+      {
+        itemType: "Compile",
+        unevaluatedInclude: "classes\\UserControlHelpers\\TestForm.cs",
+        metadata: null
+      }
+    ];
+    expect(actual).toEqual(expected);
+  });
+
   test.each([undefined, null, false, "", "invalidKey"])(
     "Returns empty array if key is '%s'",
     key => {

@@ -28,7 +28,40 @@ module.exports = {
             isCurrentLanguage: true
           }
         ],
-        returnDataSet: true
+        returnData: {
+          isDataSet: true,
+          data: [
+            {
+              name: "Main",
+              isPivot: true,
+              key: "Key",
+              value: "Value",
+              fields: [
+                {
+                  name: "ContactID",
+                  type: "int?"
+                },
+                {
+                  name: "Employee",
+                  type: "string"
+                }
+              ]
+            },
+            {
+              name: "Criteria",
+              fields: [
+                {
+                  name: "ID",
+                  type: "int?"
+                },
+                {
+                  name: "Descr",
+                  type: "string"
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   }

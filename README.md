@@ -44,12 +44,14 @@ Initialize a new form. Adds various files, depending on the options provided
 
 ## Configuration file
 
-If `essdev.config.js` exists in the root folder, the tool will try to read form it and will not ask any questions.
+If `essdev.config.js` exists in the root folder, the tool will try to read form it and **will not ask any questions**.
 
-### Example
+### Example (DataSet)
+
+`isDataSet: true`
 
 	module.exports = {
-	  formName: "ucTestForm",
+	  formName: "ucTest901",
 	  formFilters: true,
 	  asyncHandler: true,
 	  stateHelper: true,
@@ -60,7 +62,8 @@ If `essdev.config.js` exists in the root folder, the tool will try to read form 
 	        params: [
 	          {
 	            name: "@Param1",
-	            type: "int"
+	            type: "int",
+	            isNullable: true
 	          },
 	          {
 	            name: "@Param2",
@@ -68,14 +71,109 @@ If `essdev.config.js` exists in the root folder, the tool will try to read form 
 	          },
 	          {
 	            name: "@CurrentUserID",
+	            type: "int",
 	            isCurrentUser: true
 	          },
 	          {
 	            name: "@CurrentLanguageID",
+	            type: "int",
 	            isCurrentLanguage: true
 	          }
 	        ],
-	        returnDataSet: true
+	        returnData: {
+	          isDataSet: true,
+	          data: [
+	            {
+	              name: "Main",
+	              isPivot: true,
+	              key: "Key",
+	              value: "Value",
+	              fields: [
+	                {
+	                  name: "ContactID",
+	                  type: "int?"
+	                },
+	                {
+	                  name: "Employee",
+	                  type: "string"
+	                }
+	              ]
+	            },
+	            {
+	              name: "Criteria",
+	              fields: [
+	                {
+	                  name: "ID",
+	                  type: "int?"
+	                },
+	                {
+	                  name: "Descr",
+	                  type: "string"
+	                }
+	              ]
+	            }
+	          ]
+	        }
+	      }
+	    }
+	  }
+	};
+
+### Example (DataTable)
+
+`isDataSet: false`
+
+	module.exports = {
+	  formName: "ucTest901",
+	  formFilters: true,
+	  asyncHandler: true,
+	  stateHelper: true,
+	  userControlHelper: {
+	    mainData: {
+	      storedProc: {
+	        name: "XD_Test_StoredProc",
+	        params: [
+	          {
+	            name: "@Param1",
+	            type: "int",
+	            isNullable: true
+	          },
+	          {
+	            name: "@Param2",
+	            type: "string"
+	          },
+	          {
+	            name: "@CurrentUserID",
+	            type: "int",
+	            isCurrentUser: true
+	          },
+	          {
+	            name: "@CurrentLanguageID",
+	            type: "int",
+	            isCurrentLanguage: true
+	          }
+	        ],
+	        returnData: {
+	          isDataSet: false,
+	          data: [
+	            {
+	              name: "Main",
+	              isPivot: true,
+	              key: "Key",
+	              value: "Value",
+	              fields: [
+	                {
+	                  name: "ContactID",
+	                  type: "int?"
+	                },
+	                {
+	                  name: "Employee",
+	                  type: "string"
+	                }
+	              ]
+	            }	            
+	          ]
+	        }
 	      }
 	    }
 	  }

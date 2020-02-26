@@ -9,6 +9,7 @@ import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
 
 export function appReducer(state: models.State = undefined, action: IAction): models.State {
   switch (action.type) {
+    {{#if answers.formFilters}}
     case actions.CHANGE_FILTERS:
       return Object.assign({}, state, {
         Filters: Object.assign({}, state.Filters, action.payload.filters)
@@ -17,6 +18,7 @@ export function appReducer(state: models.State = undefined, action: IAction): mo
       return Object.assign({}, state, {
         Results: Object.assign({}, state.Results, action.payload.results)
       });    
+    {{/if}}
     default:
       return state;
   }
@@ -25,8 +27,10 @@ export function appReducer(state: models.State = undefined, action: IAction): mo
 // ACTIONS =============================================================================== //
 
 export enum actions {
+  {{#if answers.formFilters}}
   CHANGE_FILTERS,
   UPDATE_RESULTS
+  {{/if}}
 }
 
 export interface IAction extends reduxHelpers.IFluxAction {
@@ -35,12 +39,14 @@ export interface IAction extends reduxHelpers.IFluxAction {
 }
 
 export interface IPayload {
+  {{#if answers.formFilters}}
   filters?: models.Filters;
   results?: models.Results;  
+  {{/if}}
 }
 
 // ACTION METHODS ======================================================================== //
-
+{{#if answers.formFilters}}
 export function changeFilters(filters: models.Filters): IAction {
   return {
     type: actions.CHANGE_FILTERS,
@@ -58,3 +64,4 @@ export function updateResults(results: models.Results): IAction {
     }
   };
 }
+{{/if}}

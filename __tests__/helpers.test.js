@@ -167,6 +167,29 @@ describe("getAsyncHelperFileName()", () => {
   });
 });
 
+describe("getUserControlHelperFileName()", () => {
+  test("Return the correct file name", () => {
+    const actual = helpers.getUserControlHelperFileName("ucTestForm");
+    const expected = "TestForm.cs";
+    expect(actual).toBe(expected);
+  });
+
+  test("Returns null if name is undefined", () => {
+    const actual = helpers.getUserControlHelperFileName(undefined);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is null", () => {
+    const actual = helpers.getUserControlHelperFileName(null);
+    expect(actual).toBeNull();
+  });
+
+  test("Returns null if name is empty string", () => {
+    const actual = helpers.getUserControlHelperFileName("");
+    expect(actual).toBeNull();
+  });
+});
+
 describe("getAsyncHelperClassName()", () => {
   test("Return the correct class name", () => {
     const actual = helpers.getAsyncHelperClassName("ucTestForm");
