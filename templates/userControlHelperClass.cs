@@ -1,3 +1,5 @@
+using eStudio.classes.Helpers;
+using eStudio.classes.HttpRequestsDataModels.{{form.className}};
 using eWebCore.AppConfig;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,9 @@ namespace eStudio.classes.UserControlHelpers
     public static class {{form.className}}
     {
         {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
-        public static DataSet GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        public static DataSet GetInitialDataRaw({{userControlHelper.mainData.storedProc.methodParamsString}})
         {{else}}
-        public static DataTable GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        public static DataTable GetInitialDataRaw({{userControlHelper.mainData.storedProc.methodParamsString}})
         {{/if}}
         {
             {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
@@ -32,11 +34,8 @@ namespace eStudio.classes.UserControlHelpers
                 var {{this.paramName}}_val = {{this.paramName}} ?? (object)DBNull.Value;
                 cmd.Parameters.AddWithValue("{{this.name}}", {{this.paramName}}_val);
                 {{else}}
-                cmd.Parameters.AddWithValue("{{this.name}}", {{this.paramName}});
-                {{/if}}
-                {{#if this.isNullable}}
-
-                {{/if}}
+                cmd.Parameters.AddWithValue("{{this.name}}", {{this.paramAssign}});
+                {{/if}}                
                 {{/each}}
 
                 var da = new SqlDataAdapter();
@@ -50,6 +49,36 @@ namespace eStudio.classes.UserControlHelpers
                 return dt;
                 {{/if}}
             }
+        }
+
+        public static Data GetInitialData({{userControlHelper.mainData.storedProc.methodParamsString}})
+        {
+            var data = new Data();
+            var dataRaw = GetInitialDataRaw({{userControlHelper.mainData.storedProc.methodPassParamsString}});
+
+            {{#if userControlHelper.mainData.storedProc.returnData.isDataSet}}
+            {{#each userControlHelper.mainData.storedProc.returnData.data}}
+            if (dataRaw.Tables.Count > {{@index}})
+                {{#if this.isPivot}}
+                data.{{this.name}} = dataRaw.Tables[{{@index}}].PivotToObject<{{this.name}}>("{{this.key}}", "{{this.value}}");
+                {{else}}
+                data.{{this.name}} = dataRaw.Tables[1].DataTableToListNullable<{{this.name}}>();
+                {{/if}}
+            
+            {{/each}}
+            {{else}}
+            {{#each userControlHelper.mainData.storedProc.returnData.data}}
+            {{#if @first}}
+            {{#if this.isPivot}}
+            data.{{this.name}} = dataRaw.PivotToObject<{{this.name}}>("{{this.key}}", "{{this.value}}");
+            {{else}}
+            data.{{this.name}} = dataRaw.DataTableToListNullable<{{this.name}}>();
+            {{/if}}
+            {{/if}}
+            {{/each}}
+            {{/if}}
+            
+            return data;
         }
     }
 }

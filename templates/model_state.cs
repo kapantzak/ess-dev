@@ -12,7 +12,7 @@ namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
     {
         public int? CurrentUserContactID { get; set; }        
         public List<int> UserRoles { get; set; }        
-        public Filters Filters { get; set; }        
+        public Filters Filters { get; set; }
         public Results Results { get; set; }        
     }
 }

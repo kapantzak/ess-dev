@@ -30,8 +30,9 @@ module.exports = {
         ],
         returnData: {
           isDataSet: true,
-          data: {
-            Main: {
+          data: [
+            {
+              name: "Main",
               isPivot: true,
               key: "Key",
               value: "Value",
@@ -46,7 +47,8 @@ module.exports = {
                 }
               ]
             },
-            Criteria: {
+            {
+              name: "Criteria",
               fields: [
                 {
                   name: "ID",
@@ -58,7 +60,7 @@ module.exports = {
                 }
               ]
             }
-          }
+          ]
         }
       }
     }

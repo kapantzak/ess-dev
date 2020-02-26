@@ -23,6 +23,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using static eStudio.classes.Helpers.AdoHelper;
+using eStudio.classes.UserControlHelpers;
 
 namespace eStudio
 {
@@ -76,10 +77,19 @@ namespace eStudio
         
         private State GetInitialState()
         {
+            {{# if answers.userControlHelper}}
+            {{#each userControlHelper.mainData.storedProc.params}}
+            var {{this.paramName}} = null;
+            {{/each}}
+            {{/if}}
+
             return new State
             {
                 CurrentUserContactID = this.sp.eUser.User.ContactID,
                 UserRoles = this.userRoles.GetAllRoles()
+                {{# if answers.userControlHelper}}
+                Data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
+                {{/if}}
             };
         }
         {{/if}}

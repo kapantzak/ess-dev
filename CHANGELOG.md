@@ -2,8 +2,9 @@
 
 ## [v2.2.0] - 2020-02-25
 ### Added
-- `--c` option (Configuration file)
+- Configuration file `essdev.config.js`
 - Template for UserControlHelper class
+- Adds data models (`model_sample.cs` template)
 
 ## [v2.1.1] - 2020-02-24
 ### Fixed
