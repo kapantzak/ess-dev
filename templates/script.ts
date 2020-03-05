@@ -32,7 +32,9 @@ function initApp(): void {
   {{#if answers.stateHelper}}
   if (setInitialState()) {
     const state = store.getState();
-    
+    {{#if answers.formFilters}}
+    initFilters(state);
+    {{/if}}
   }
   {{/if}}
 }
@@ -53,6 +55,58 @@ function setInitialState(): boolean {
     return true;
   }
   return false;
+}
+{{/if}}
+
+{{#if answers.formFilters}}
+function initFilters(state: models.State): void {
+
+  {{#each filters.groups}}
+  {{#each this.filters}}  
+  {{> (lookup . 'templateName') this}}
+  
+  {{/each}}
+  {{/each}}
+
+  const filters = new Filters($('#filters'), {
+      applyFiltersCallback: applyFiltersCallback,
+      useValidation: true,
+      sessionStorageKey: 'SESSION_{{form.name}}'
+  });
+}
+
+function applyFiltersCallback(e: IFiltersApplyEvent): void {
+  if (e.valid) {
+      changeState_Filters(getFiltersData(e));
+      tryApply();
+  } else {
+      new ModalAlert({
+          alertType: BootstrapColorClass.danger,
+          body: getClientXStaticTranslation('')
+      }).show();
+  }
+}
+
+function getFiltersData(e: IFiltersApplyEvent): models.Filters {
+  const f = e.filters || {};
+  
+  return {};
+}
+
+async function tryApply(): Promise<void> {
+  const results = $('#divResults');
+  const filters = (store.getState() || {}).Filters;
+  if (filters) {
+      toggleMainLoader(true);
+      results.show();
+      // Render results
+      toggleMainLoader(false);        
+  } else {
+      new ModalAlert({
+          alertType: BootstrapColorClass.danger,
+          body: getClientXStaticTranslation('')
+      }).show();
+  }
 }
 {{/if}}
 

@@ -3,6 +3,34 @@ module.exports = {
   formFilters: true,
   asyncHandler: true,
   stateHelper: true,
+  filters: {
+    groups: [
+      {
+        filters: [
+          {
+            id: "cmbFilter1",
+            type: "KendoDropDownList"
+          },
+          {
+            id: "ddtFilter2",
+            type: "KendoDropDownTree"
+          }
+        ]
+      },
+      {
+        filters: [
+          {
+            id: "sacFilter3",
+            type: "SacFilter"
+          },
+          {
+            id: "drpFilter4",
+            type: "KendoDateRangePicker"
+          }
+        ]
+      }
+    ]
+  },
   userControlHelper: {
     mainData: {
       storedProc: {
