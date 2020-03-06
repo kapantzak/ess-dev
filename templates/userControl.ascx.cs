@@ -88,9 +88,12 @@ namespace eStudio
                 CurrentUserContactID = this.sp.eUser.User.ContactID,
                 UserRoles = this.userRoles.GetAllRoles(),
                 CurrentUserDepartments = this.GetCurrentUserDepartments(),
+                {{#if answers.formFilters}}
                 Datasources = this.GetDatasources(),
+                {{else}}
                 {{# if answers.userControlHelper}}
                 Data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
+                {{/if}}
                 {{/if}}
             };
         }
@@ -101,6 +104,7 @@ namespace eStudio
             return emp.GetDepartmentsOfEmployee(this.sp.eUser.User.ContactID);
         }
 
+        {{#if answers.formFilters}}
         private Datasources GetDatasources()
         {
             return new Datasources
@@ -154,6 +158,7 @@ namespace eStudio
             }
             return new List<ITreeStructureData>();
         }
+        {{/if}}
         {{/if}}
                         
         public void Localize()

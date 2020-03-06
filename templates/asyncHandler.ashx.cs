@@ -39,17 +39,44 @@ namespace eStudio.Async
                 {
                     switch (t)
                     {
-                        case "methodName":
-                            this.MethodName();
+                        {{#if answers.formFilters}}
+                        case "applyFilters":
+                            this.ApplyFilters();
                             break;
+                        {{/if}}
                     }
                 }
             }
         }
 
-        private void MethodName()
+        private void ApplyFilters()
         {
-            //
+            var filtersJson = this.context.Request["filters"];
+            Filters filters = null;
+            try
+            {
+                filters = DeserializeJson<Filters>(filtersJson);
+            }
+            catch (Exception ex)
+            {
+                this.context.Response.Write($"Error: Deserialize filters: {ex.Message}");
+                return;
+            }
+
+            if (filters != null)
+            {
+                {{# if answers.userControlHelper}}
+                {{#each userControlHelper.mainData.storedProc.params}}
+                var {{this.paramName}} = null;
+                {{/each}}
+                {{/if}}
+                
+                var data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
+                if (data != null)
+                    ToJSON(data, this.context);
+                else
+                    this.context.Response.Write("Unable to get data");
+            }
         }
     }
 }

@@ -13,7 +13,9 @@ namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
         public int? CurrentUserContactID { get; set; }
         public List<int> CurrentUserDepartments { get; set; }
         public List<int> UserRoles { get; set; }
+        {{#if answers.formFilters}}
         public Datasources Datasources { get; set; }
+        {{/if}}
         public Filters Filters { get; set; }
         public Results Results { get; set; }
     }

@@ -99,7 +99,28 @@ async function tryApply(): Promise<void> {
   if (filters) {
       toggleMainLoader(true);
       results.show();
-      // Render results
+      
+      {{#if answers.formFilters}}
+      const resp = await asyncHelper.applyFilters(filters);
+      if (resp.status === AsyncResponseStatus.success) {
+          if (resp.data) {
+              if (typeof resp.data === 'string') {
+                  console.warn(`Async/{{asyncHandler.name}}.ashx --> applyFilters() --> ${resp.data}`);
+              } else {                
+                  changeState_Results({
+                    Data: resp.data
+                  });
+
+                  // Render data from state
+              }
+          } else {
+              console.warn('Async/{{asyncHandler.name}}.ashx --> applyFilters() --> No data returned');
+          }
+      } else {
+          console.warn(`Async/{{asyncHandler.name}}.ashx --> applyFilters() --> ${resp.message}`);
+      }
+      {{/if}}
+
       toggleMainLoader(false);        
   } else {
       new ModalAlert({
@@ -108,6 +129,20 @@ async function tryApply(): Promise<void> {
       }).show();
   }
 }
+{{/if}}
+
+
+{{#if answers.stateHelper}}
+// STATE ------------------------------------------------------------------------------------- //
+{{#if answers.formFilters}}
+function changeState_Filters(filters: models.Filters): void {
+  store.dispatch(stateHelper.changeFilters(filters));
+}
+
+function changeState_Results(results: models.Results): void {
+  store.dispatch(stateHelper.updateResults(results));
+}
+{{/if}}
 {{/if}}
 
 $(window).load(() => {
