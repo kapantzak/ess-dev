@@ -3,6 +3,66 @@ module.exports = {
   formFilters: true,
   asyncHandler: true,
   stateHelper: true,
+  filters: {
+    groups: [
+      {
+        filters: [
+          {
+            id: "cmbFilter1",
+            type: "KendoDropDownList"
+          },
+          {
+            id: "ddtFilter2",
+            type: "KendoDropDownTree"
+          },
+          {
+            id: "ddtFilter8",
+            type: "KendoNumericTextBox"
+          },
+          {
+            id: "ddtFilter9",
+            type: "KendoMultiSelect"
+          },
+          {
+            id: "chkFilter11",
+            type: "Checkbox"
+          },
+          {
+            id: "txtFilter12",
+            type: "Textbox"
+          }
+        ]
+      },
+      {
+        filters: [
+          {
+            id: "sacFilter3",
+            type: "SacFilter"
+          },
+          {
+            id: "sacFilter10",
+            type: "GreenButtonFilter"
+          },
+          {
+            id: "drpFilter4",
+            type: "KendoDateRangePicker"
+          },
+          {
+            id: "drpFilter5",
+            type: "KendoDatePicker"
+          },
+          {
+            id: "drpFilter6",
+            type: "KendoDateTimePicker"
+          },
+          {
+            id: "drpFilter7",
+            type: "KendoTimePicker"
+          }
+        ]
+      }
+    ]
+  },
   userControlHelper: {
     mainData: {
       storedProc: {
