@@ -55,7 +55,7 @@ namespace eStudio.Async
             Filters filters = null;
             try
             {
-                filters = DeserializeJson<Filters>(filtersJson);
+                filters = DeserializeJsonLocal<Filters>(filtersJson);
             }
             catch (Exception ex)
             {
