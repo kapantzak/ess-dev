@@ -8,6 +8,6 @@ namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
     [ExportToTypescript]
     public class Results
     {
-                
+        public Data Data { get; set; }
     }
 }

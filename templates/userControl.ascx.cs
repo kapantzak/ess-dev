@@ -86,12 +86,79 @@ namespace eStudio
             return new State
             {
                 CurrentUserContactID = this.sp.eUser.User.ContactID,
-                UserRoles = this.userRoles.GetAllRoles()
+                UserRoles = this.userRoles.GetAllRoles(),
+                CurrentUserDepartments = this.GetCurrentUserDepartments(),
+                {{#if answers.formFilters}}
+                Datasources = this.GetDatasources(),
+                {{else}}
                 {{# if answers.userControlHelper}}
                 Data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
                 {{/if}}
+                {{/if}}
             };
         }
+
+        private List<int> GetCurrentUserDepartments()
+        {
+            var emp = new Employees(this.sp);
+            return emp.GetDepartmentsOfEmployee(this.sp.eUser.User.ContactID);
+        }
+
+        {{#if answers.formFilters}}
+        private Datasources GetDatasources()
+        {
+            return new Datasources
+            {
+                DepartmentsDatasourceJSON = JsonConvert.SerializeObject(AppHelper.ConvertTreeStructureToKendoDropDownTree(this.GetDepartmentsDatasource())),
+                GroupsDatasourceJSON = JsonConvert.SerializeObject(AppHelper.ConvertTreeStructureToKendoDropDownTree(this.GetGroupsDatasource()))                
+            };
+        }
+
+        private List<ITreeStructureData> GetDepartmentsDatasource()
+        {            
+            try
+            {
+                return DepartmentsDatasources.GetDepartmentsTree(this.sp, new int[] { 1005 }.ToList());
+            }
+            catch (CustomException ex)
+            {
+                RadScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "GetDepartmentsTree.Error", $";console.warn('{ex.Message}');", true);
+                return new List<ITreeStructureData>();
+            }
+        }
+
+        private List<ITreeStructureData> GetGroupsDatasource()
+        {            
+            var viewAllRoles = new int[] { 1005 }.ToList();
+            var scenarios = new List<UserGroupsScenario>();
+
+            // Check if scenarios needed
+
+            // scenarios.Add(new UserGroupsScenario
+            // {
+            //     ScenarioID = 11,
+            //     Mode = ScenarioMode.View
+            // });
+            // scenarios.Add(new UserGroupsScenario
+            // {
+            //     ScenarioID = 12,
+            //     Mode = ScenarioMode.Edit
+            // });
+
+            var userGroup = new UserGroup(viewAllRoles, scenarios, this.sp);
+            var dt = userGroup.XD_GetUserGroups();
+            if (dt.Rows.Count > 0)
+            {
+                return dt.AsEnumerable().Select(x => new ITreeStructureData
+                {
+                    ID = x.Field<int>("ID"),
+                    Descr = x.Field<string>("Descr"),
+                    ParentID = x.Field<int?>("ParentID")
+                }).ToList();
+            }
+            return new List<ITreeStructureData>();
+        }
+        {{/if}}
         {{/if}}
                         
         public void Localize()
@@ -100,9 +167,7 @@ namespace eStudio
                 "selectcmb"                
             }, sp, this);
 
-            AppHelper.LocalizeFiltersResultsMessages(this);
-                        
-            //lbLiteral.Text = Languages.Translate("TranslationKey");
+            AppHelper.LocalizeFiltersResultsMessages(this);            
         }
     }
 }
