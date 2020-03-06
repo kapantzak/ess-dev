@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.3.0] - 2020-03-06
+### Added
+- Filters templates
+
 ## [v2.2.0] - 2020-02-25
 ### Added
 - Configuration file `essdev.config.js`
@@ -27,7 +31,7 @@
 - `Array.isArray` check for `group` object
 
 
-
+[v2.3.0]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.2.0
 [v2.2.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.1.1
 [v2.1.1]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.1.0
 [v2.1.0]: https://github.com/kapantzak/ess-dev/compare/v2.1.0...v2.0.0
