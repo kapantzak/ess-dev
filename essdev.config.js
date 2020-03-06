@@ -22,6 +22,14 @@ module.exports = {
           {
             id: "ddtFilter9",
             type: "KendoMultiSelect"
+          },
+          {
+            id: "chkFilter11",
+            type: "Checkbox"
+          },
+          {
+            id: "txtFilter12",
+            type: "Textbox"
           }
         ]
       },
