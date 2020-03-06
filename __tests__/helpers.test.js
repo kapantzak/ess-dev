@@ -553,3 +553,56 @@ describe("getStoredProcMethodParamName()", () => {
     expect(() => helpers.getStoredProcMethodParamName(sqlName)).toThrow();
   });
 });
+
+describe("getTemplateName()", () => {
+  test.each([
+    ["KendoDropDownList", "filter_KendoDropDownList"],
+    ["KendoDropDownTree", "filter_KendoDropDownTree"],
+    ["KendoNumericTextBox", "filter_KendoNumericTextBox"],
+    ["KendoMultiSelect", "filter_KendoMultiSelect"],
+    ["Checkbox", "filter_Checkbox"],
+    ["GreenButtonFilter", "filter_GreenButtonFilter"]
+  ])("Returns '%s' when provided with '%s'", (filterType, exepected) => {
+    const actual = helpers.getTemplateName(filterType);
+    expect(actual).toBe(exepected);
+  });
+});
+
+describe("getFiltersObject()", () => {
+  test("Return null if no filters property exists", () => {
+    const actual = helpers.getFiltersObject({});
+    expect(actual).toBeNull();
+  });
+
+  test("Return the expected object", () => {
+    const answers = {
+      filters: {
+        groups: [
+          {
+            filters: [
+              {
+                id: "filterId",
+                type: "KendoDropDownList"
+              }
+            ]
+          }
+        ]
+      }
+    };
+    const actual = helpers.getFiltersObject(answers);
+    const expected = {
+      groups: [
+        {
+          filters: [
+            {
+              id: "filterId",
+              type: "KendoDropDownList",
+              templateName: "filter_KendoDropDownList"
+            }
+          ]
+        }
+      ]
+    };
+    expect(actual).toEqual(expected);
+  });
+});
