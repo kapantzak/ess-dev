@@ -356,6 +356,7 @@ describe("getHandlebarsData()", () => {
         name: "state_testForm.ts",
         import_name: "state_testForm"
       },
+      filters: null,
       userControlHelper: null
     };
     expect(actual).toEqual(expected);

@@ -14,6 +14,14 @@ module.exports = {
           {
             id: "ddtFilter2",
             type: "KendoDropDownTree"
+          },
+          {
+            id: "ddtFilter8",
+            type: "KendoNumericTextBox"
+          },
+          {
+            id: "ddtFilter9",
+            type: "KendoMultiSelect"
           }
         ]
       },
@@ -24,8 +32,24 @@ module.exports = {
             type: "SacFilter"
           },
           {
+            id: "sacFilter10",
+            type: "GreenButtonFilter"
+          },
+          {
             id: "drpFilter4",
             type: "KendoDateRangePicker"
+          },
+          {
+            id: "drpFilter5",
+            type: "KendoDatePicker"
+          },
+          {
+            id: "drpFilter6",
+            type: "KendoDateTimePicker"
+          },
+          {
+            id: "drpFilter7",
+            type: "KendoTimePicker"
           }
         ]
       }

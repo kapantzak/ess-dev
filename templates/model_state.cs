@@ -10,9 +10,11 @@ namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
     [ExportToTypescript]
     public class State
     {
-        public int? CurrentUserContactID { get; set; }        
-        public List<int> UserRoles { get; set; }        
+        public int? CurrentUserContactID { get; set; }
+        public List<int> CurrentUserDepartments { get; set; }
+        public List<int> UserRoles { get; set; }
+        public Datasources Datasources { get; set; }
         public Filters Filters { get; set; }
-        public Results Results { get; set; }        
+        public Results Results { get; set; }
     }
 }
