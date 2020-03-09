@@ -5,26 +5,35 @@
 <div id="div_{{form.name}}">
 
     <asp:HiddenField ID="Hidden_InitialState_{{form.name}}" runat="server" ClientIDMode="Static" />
-    
-    {{#if answers.formFilters}}
-    <%--Filters--%>
-    <div id="filtersHolder" runat="server" class="row" ClientIDMode="Static">
-        <div id="filters" class="container-fluid"></div>
-    </div>
-    {{/if}}
 
-    <%--No results--%>
-    <div id="noResults"></div>
-
-    <%--Results--%>
-    <div id="divResults" class="row marginTop-lg" style="display:none;">    
+    <div id="accessMessageHolder" runat="server" class="row" visible="false">
         <div class="container-fluid">
-
-            <%--Place content here--%>
-
-        </div>    
+            <div id="accessMessageAlert" class="alert alert-danger" runat="server" role="alert"><asp:Literal ID="lbAccessMessage" runat="server" /></div>
+        </div>                    
     </div>
+    
+    <div id="mainContent" runat="server">
 
+        {{#if answers.formFilters}}
+        <%--Filters--%>
+        <div id="filtersHolder" runat="server" class="row" ClientIDMode="Static">
+            <div id="filters" class="container-fluid"></div>
+        </div>
+        {{/if}}
+
+        <%--No results--%>
+        <div id="noResults"></div>
+
+        <%--Results--%>
+        <div id="divResults" class="row marginTop-lg" style="display:none;">    
+            <div class="container-fluid">
+
+                <%--Place content here--%>
+
+            </div>    
+        </div>
+
+    </div>
 </div>
 
 

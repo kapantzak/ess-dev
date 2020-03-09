@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [v2.3.2] - 2020-03-09
+### Added
+- `ChainedMethods` class
+
+## [v2.3.1] - 2020-03-06
+### Fixed
+- CHANGELOG
+
 ## [v2.3.0] - 2020-03-06
 ### Added
 - Filters templates
@@ -34,6 +42,8 @@
 
 
 [Unreleased]: https://github.com/kapantzak/ess-dev/compare/master...develop
+[v2.3.2]: https://github.com/kapantzak/ess-dev/compare/v2.3.1...v2.3.2
+[v2.3.1]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.3.1
 [v2.3.0]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.2.0
 [v2.2.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.1.1
 [v2.1.1]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.1.0
