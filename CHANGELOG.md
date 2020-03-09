@@ -1,5 +1,7 @@
 # Change Log
 
+## [Unreleased]
+
 ## [v2.3.0] - 2020-03-06
 ### Added
 - Filters templates
@@ -31,6 +33,7 @@
 - `Array.isArray` check for `group` object
 
 
+[Unreleased]: https://github.com/kapantzak/ess-dev/compare/master...develop
 [v2.3.0]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.2.0
 [v2.2.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.1.1
 [v2.1.1]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.1.0
