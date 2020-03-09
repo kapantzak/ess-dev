@@ -5,5 +5,6 @@ const {{id}} = new KendoDropDownList('{{id}}', {
   value: "",
   width: 200,
   dropdownAutoWidth: true,
-  label: getClientXStaticTranslation('')
+  labelActive: false,
+  optionLabel: getClientXStaticTranslation('')
 });

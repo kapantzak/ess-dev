@@ -1,5 +1,11 @@
 # Change Log
 
+## [Unreleased]
+
+## [v2.3.2] - 2020-03-09
+### Added
+- `ChainedMethods` class
+
 ## [v2.3.1] - 2020-03-06
 ### Fixed
 - CHANGELOG
@@ -35,11 +41,13 @@
 - `Array.isArray` check for `group` object
 
 
+[Unreleased]: https://github.com/kapantzak/ess-dev/compare/master...develop
+[v2.3.2]: https://github.com/kapantzak/ess-dev/compare/v2.3.1...v2.3.2
 [v2.3.1]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.3.1
-[v2.3.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.3.0
-[v2.2.0]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.2.0
-[v2.1.1]: https://github.com/kapantzak/ess-dev/compare/v2.1.0...v2.1.1
-[v2.1.0]: https://github.com/kapantzak/ess-dev/compare/v2.0.0...v2.1.0
-[v2.0.0]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.2.0
-[v1.0.9]: https://github.com/kapantzak/ess-dev/compare/v1.0.8...v1.0.9
-[v1.0.8]: https://github.com/kapantzak/ess-dev/compare/v1.0.7...v1.0.8
+[v2.3.0]: https://github.com/kapantzak/ess-dev/compare/v2.3.0...v2.2.0
+[v2.2.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.1.1
+[v2.1.1]: https://github.com/kapantzak/ess-dev/compare/v2.1.1...v2.1.0
+[v2.1.0]: https://github.com/kapantzak/ess-dev/compare/v2.1.0...v2.0.0
+[v2.0.0]: https://github.com/kapantzak/ess-dev/compare/v2.2.0...v2.1.1
+[v1.0.9]: https://github.com/kapantzak/ess-dev/compare/v1.0.9...v1.0.8
+[v1.0.8]: https://github.com/kapantzak/ess-dev/compare/v1.0.8...v1.0.7

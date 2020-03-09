@@ -38,6 +38,9 @@ namespace eStudio
         private UserRoles userRoles = null;
         private AppRequest rq;        
         public RequestParams thisParams = null;
+        {{#if answers.stateHelper}}
+        private State state = null;
+        {{/if}}
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,16 +66,58 @@ namespace eStudio
 
         private void InitApp()
         {
-            {{#if answers.stateHelper}}
-            this.SetInitialState();
-            {{/if}}
+            new ChainedMethods()
+                .AddBool(this.ValidateRequestParams)
+                {{#if answers.stateHelper}}
+                .AddBool(this.SetInitialState)
+                .AddBool(this.CheckAllowAccess)
+                {{/if}}
+                .AddVoid(this.Localize)
+                .Init();
+        }
+
+        private bool ValidateRequestParams()
+        {
+            // Add validation logic
+            // if (this.thisParams == null)
+            // {
+            //     this.ToggleAccessMessage(true);
+            //     return false;
+            // }
+            return true;
         }
 
         {{#if answers.stateHelper}}
-        private void SetInitialState()
+        private bool CheckAllowAccess()
+        {
+            // Check access control from state --> this.state
+            // if (false)
+            // {
+            //     this.ToggleAccessMessage(true, Languages.Translate("NoAccess"));
+            //     return false;
+            // }
+            return true;
+        }
+        {{/if}}
+
+        {{#if answers.stateHelper}}
+        private bool SetInitialState()
         {
             var state = this.GetInitialState();
-            Hidden_InitialState_{{form.name}}.Value = state.EncodeAndSerialize();
+            if (state != null)
+            {
+                this.state = state;
+                Hidden_InitialState_{{form.name}}.Value = state.EncodeAndSerialize();
+                return true;
+            }
+            return false;            
+        }
+
+        private void ToggleAccessMessage(bool show, string message = "")
+        {
+            lbAccessMessage.Text = !string.IsNullOrWhiteSpace(message) ? message : Languages.Translate("NoAccess"); // Add translation
+            mainContent.Visible = !show;
+            accessMessageHolder.Visible = show;
         }
         
         private State GetInitialState()
@@ -81,6 +126,30 @@ namespace eStudio
             {{#each userControlHelper.mainData.storedProc.params}}
             var {{this.paramName}} = null;
             {{/each}}
+
+            Data data = null;
+            try
+            {
+                data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}});
+            }
+            catch (Exception ex)
+            {
+                this.ToggleAccessMessage(true, ex.Message);
+                return null;
+            }
+            {{/if}}
+
+            {{#if answers.formFilters}}
+            Datasources datasources = null;
+            try
+            {
+                datasources = this.GetDatasources();
+            }
+            catch (Exception ex)
+            {
+                this.ToggleAccessMessage(true, ex.Message);
+                return null;
+            }
             {{/if}}
 
             return new State
@@ -89,10 +158,10 @@ namespace eStudio
                 UserRoles = this.userRoles.GetAllRoles(),
                 CurrentUserDepartments = this.GetCurrentUserDepartments(),
                 {{#if answers.formFilters}}
-                Datasources = this.GetDatasources(),
+                Datasources = datasources,
                 {{else}}
                 {{# if answers.userControlHelper}}
-                Data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
+                Data = data
                 {{/if}}
                 {{/if}}
             };
