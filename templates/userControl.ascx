@@ -16,7 +16,7 @@
 
         {{#if answers.formFilters}}
         <%--Filters--%>
-        <div id="filtersHolder" runat="server" class="row" ClientIDMode="Static">
+        <div id="filtersHolder" runat="server" ClientIDMode="Static">
             <div id="filters" class="container-fluid"></div>
         </div>
         {{/if}}
