@@ -8,3 +8,4 @@ const {{id}} = new KendoDropDownList('{{id}}', {
   labelActive: false,
   optionLabel: getClientXStaticTranslation('')
 });
+group_{{groupId}}.add({{id}});

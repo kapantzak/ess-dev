@@ -13,6 +13,9 @@ import { localizeKendo, getClientXStaticTranslation } from '../helpers/localizat
 import '@progress/kendo-ui/js/kendo.all.js';
 import '@progress/kendo-ui/js/cultures/kendo.culture.el-GR.js';
 import { parseDecodedJSON } from '../helpers/htmlHelper';
+{{#if answers.formFilters}}
+import { Filters, FiltersGroup, IFiltersApplyEvent } from '../helpers/filtersApi/filters';
+{{/if}}
 {{#if answers.asyncHandler}}
 import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import { IAsyncResponse, AsyncResponseStatus } from '../asyncHelpers/generalAsyncHelper';
@@ -62,17 +65,28 @@ function setInitialState(): boolean {
 function initFilters(state: models.State): void {
 
   {{#each filters.groups}}
+  // Group {{this.id}} ----------------------------------------------------------- //
+  const group_{{this.id}}_opts = {
+    label: '{{this.options.label}}',
+    visibleByDefault: {{this.options.visibleByDefault}},
+  };
+  const group_{{this.id}} = new FiltersGroup('{{this.id}}', group_{{this.id}}_opts);
+  
   {{#each this.filters}}  
   {{> (lookup . 'templateName') this}}
   
   {{/each}}
   {{/each}}
-
-  const filters = new Filters($('#filters'), {
+  // Filters --------------------------------------------------------------------- //
+  new Filters($('#filters'), {
       applyFiltersCallback: applyFiltersCallback,
       useValidation: true,
       sessionStorageKey: 'SESSION_{{form.name}}'
-  });
+  })
+  {{#each filters.groups}}  
+  .addGroup(group_{{this.id}});
+  {{/each}}
+  .init();
 }
 
 function applyFiltersCallback(e: IFiltersApplyEvent): void {

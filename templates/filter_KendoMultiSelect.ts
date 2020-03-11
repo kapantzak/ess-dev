@@ -7,3 +7,4 @@ const {{id}} = new KendoMultiSelect('{{id}}', {
     placeholder: getClientXStaticTranslation(''),
     labelActive: false
 });
+group_{{groupId}}.add({{id}});

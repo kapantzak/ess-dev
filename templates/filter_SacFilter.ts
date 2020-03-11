@@ -23,3 +23,4 @@ const {{id}} = new SacFilter('{{id}}', {
   extendedValueObject: false,
   label: getClientXStaticTranslation('')
 });
+group_{{groupId}}.add({{id}});
