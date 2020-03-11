@@ -54,3 +54,4 @@ const {{id}} = new GreenButtonFilter('{{id}}', {
     validationErrorMessage: getClientXStaticTranslation(''),
     label: getClientXStaticTranslation('')
 });
+group_{{groupId}}.add({{id}});

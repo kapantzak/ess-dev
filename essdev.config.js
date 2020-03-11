@@ -6,6 +6,11 @@ module.exports = {
   filters: {
     groups: [
       {
+        id: "groupMain",
+        options: {
+          label: "groupMainLabel",
+          visibleByDefault: true
+        },
         filters: [
           {
             id: "cmbFilter1",
@@ -34,6 +39,11 @@ module.exports = {
         ]
       },
       {
+        id: "groupSecond",
+        options: {
+          label: "groupSecondLabel",
+          visibleByDefault: false
+        },
         filters: [
           {
             id: "sacFilter3",

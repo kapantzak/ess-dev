@@ -6,3 +6,4 @@ const {{id}} = new KendoDateRangePicker('{{id}}', {
   },
   label: getClientXStaticTranslation('')
 });
+group_{{groupId}}.add({{id}});

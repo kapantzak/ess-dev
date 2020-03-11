@@ -5,3 +5,4 @@ const {{id}} = new KendoDropDownTree('{{id}}', {
   labelActive: false,
   placeholder: getClientXStaticTranslation('')
 });
+group_{{groupId}}.add({{id}});

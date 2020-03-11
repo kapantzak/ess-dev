@@ -6,3 +6,4 @@ const {{id}} = new KendoNumericTextBox('{{id}}', {
     step: 1,
     value: 0
 });
+group_{{groupId}}.add({{id}});

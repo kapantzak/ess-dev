@@ -65,24 +65,28 @@ function setInitialState(): boolean {
 function initFilters(state: models.State): void {
 
   {{#each filters.groups}}
+  // Group {{this.id}} ----------------------------------------------------------- //
+  const group_{{this.id}}_opts = {
+    label: '{{this.options.label}}',
+    visibleByDefault: {{this.options.visibleByDefault}},
+  };
+  const group_{{this.id}} = new FiltersGroup('{{this.id}}', group_{{this.id}}_opts);
+  
   {{#each this.filters}}  
   {{> (lookup . 'templateName') this}}
   
   {{/each}}
   {{/each}}
-
-  const groupMain = new FiltersGroup('fltGroup_Main');
-
-  // Add filters to group
-  // groupMain.add(...)
-
-  const filters = new Filters($('#filters'), {
+  // Filters --------------------------------------------------------------------- //
+  new Filters($('#filters'), {
       applyFiltersCallback: applyFiltersCallback,
       useValidation: true,
       sessionStorageKey: 'SESSION_{{form.name}}'
-  });
-
-  filters.addGroup(groupMain).init();
+  })
+  {{#each filters.groups}}  
+  .addGroup(group_{{this.id}});
+  {{/each}}
+  .init();
 }
 
 function applyFiltersCallback(e: IFiltersApplyEvent): void {
