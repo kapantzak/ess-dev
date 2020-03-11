@@ -13,6 +13,9 @@ import { localizeKendo, getClientXStaticTranslation } from '../helpers/localizat
 import '@progress/kendo-ui/js/kendo.all.js';
 import '@progress/kendo-ui/js/cultures/kendo.culture.el-GR.js';
 import { parseDecodedJSON } from '../helpers/htmlHelper';
+{{#if answers.formFilters}}
+import { Filters, FiltersGroup, IFiltersApplyEvent } from '../helpers/filtersApi/filters';
+{{/if}}
 {{#if answers.asyncHandler}}
 import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import { IAsyncResponse, AsyncResponseStatus } from '../asyncHelpers/generalAsyncHelper';
@@ -68,11 +71,18 @@ function initFilters(state: models.State): void {
   {{/each}}
   {{/each}}
 
+  const groupMain = new FiltersGroup('fltGroup_Main');
+
+  // Add filters to group
+  // groupMain.add(...)
+
   const filters = new Filters($('#filters'), {
       applyFiltersCallback: applyFiltersCallback,
       useValidation: true,
       sessionStorageKey: 'SESSION_{{form.name}}'
   });
+
+  filters.addGroup(groupMain).init();
 }
 
 function applyFiltersCallback(e: IFiltersApplyEvent): void {
