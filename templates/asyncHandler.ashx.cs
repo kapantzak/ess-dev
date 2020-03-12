@@ -16,6 +16,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using eStudio.classes.UserControlHelpers;
 
 namespace eStudio.Async
 {    
@@ -71,7 +72,7 @@ namespace eStudio.Async
                 {{/each}}
                 {{/if}}
                 
-                var data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}})
+                var data = {{form.className}}.GetInitialData({{userControlHelper.mainData.storedProc.methodPassParamsString}});
                 if (data != null)
                     ToJSON(data, this.context);
                 else

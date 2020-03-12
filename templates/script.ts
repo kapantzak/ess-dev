@@ -8,6 +8,8 @@ import { Store, createStore } from 'redux';
 import * as stateHelper from '../reduxStates/{{stateHelper.import_name}}';
 import { getHiddenReduxStateSelector } from '../reduxStates/reduxHelpers';
 {{/if}}
+import { toggleMainLoader } from '../helpers/mainLoader';
+import { ModalAlert, ModalConfirm, BootstrapColorClass } from '../helpers/customBootstrap';
 import { getHiddenFieldData, waitVisible } from '../helpers/genericHelpers';
 import { localizeKendo, getClientXStaticTranslation } from '../helpers/localizationHelper';
 import '@progress/kendo-ui/js/kendo.all.js';
@@ -24,6 +26,7 @@ import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_
 import { IAsyncResponse, AsyncResponseStatus } from '../asyncHelpers/generalAsyncHelper';
 {{/if}}
 import models = eStudio.classes.HttpRequestsDataModels.{{form.className}};
+import modelsGeneric = eStudio.classes.HttpRequestsDataModels.Generic;
 
 localizeKendo();
 
