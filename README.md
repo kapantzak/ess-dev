@@ -46,6 +46,36 @@ Initialize a new form. Adds various files, depending on the options provided
 
 If `essdev.config.js` exists in the root folder, the tool will try to read form it and **will not ask any questions**.
 
+### Options
+
+#### formName [`string`]
+
+The user control name
+
+#### formFilters [`boolean`]
+
+Adds form filters
+
+#### asyncHandler [`boolean`]
+
+Adds async handler files
+
+#### stateHelper [`boolean`]
+
+Adds redux state helper files
+
+#### buttons [`boolean`]
+
+Adds button holders in HTML and initializes sticky header
+
+#### filters [`object`]
+
+Filters configuration object
+
+#### userControlHelper [`object`]
+
+User control helper configuration object 
+
 ### Example (DataSet)
 
 `isDataSet: true`
@@ -55,6 +85,7 @@ If `essdev.config.js` exists in the root folder, the tool will try to read form 
 	  formFilters: true,
 	  asyncHandler: true,
 	  stateHelper: true,
+      buttons: true,
 	  userControlHelper: {
 	    mainData: {
 	      storedProc: {
@@ -128,6 +159,7 @@ If `essdev.config.js` exists in the root folder, the tool will try to read form 
 	  formFilters: true,
 	  asyncHandler: true,
 	  stateHelper: true,
+      buttons: true,
 	  userControlHelper: {
 	    mainData: {
 	      storedProc: {
