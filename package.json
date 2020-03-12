@@ -1,7 +1,7 @@
 {
   "name": "ess-dev",
-  "version": "2.3.5",
-  "description": "Biolerplate code for ess forms development",
+  "version": "2.3.6",
+  "description": "Boilerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
     "ess-dev": "node lib/index.js init -o output",

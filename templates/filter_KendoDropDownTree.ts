@@ -1,6 +1,6 @@
 const {{id}} = new KendoDropDownTree('{{id}}', {
   dataSource: [],
-  value: "",
+  value: '',
   width: 200,
   labelActive: false,
   placeholder: getClientXStaticTranslation('')

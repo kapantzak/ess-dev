@@ -10,7 +10,7 @@ namespace eStudio.classes.HttpRequestsDataModels.{{form.className}}
     public class {{dataModel.name}}
     {
         {{#each dataModel.props}}
-        public {{this.type}} {{this.name}} { get; set; }
+        public {{{this.type}}} {{this.name}} { get; set; }
         {{/each}}
     }
 }

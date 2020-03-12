@@ -72,7 +72,7 @@ namespace eStudio.classes.UserControlHelpers
             {{#if this.isPivot}}
             data.{{this.name}} = dataRaw.PivotToObject<{{this.name}}>("{{this.key}}", "{{this.value}}");
             {{else}}
-            data.{{this.name}} = dataRaw.DataTableToListNullable<{{this.name}}>();
+            data.{{this.name}} = dataRaw.DataTableToListNullable<List<{{this.name}}>>();
             {{/if}}
             {{/if}}
             {{/each}}
