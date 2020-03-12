@@ -14,22 +14,29 @@
     
     <div id="mainContent" runat="server">
 
-        {{#if answers.formFilters}}
-        <%--Filters--%>
+        {{#if answers.buttons}}
+        <div id="stickyButtons" runat="server" ClientIDMode="Static">
+            <!-- Add buttons -->
+        </div>
+
+        <div class="row">
+            <div id="divButtonsHolder" class="container-fluid">
+                <!-- Add buttons -->
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if answers.formFilters}}        
         <div id="filtersHolder" runat="server" ClientIDMode="Static">
             <div id="filters" class="container-fluid"></div>
         </div>
         {{/if}}
-
-        <%--No results--%>
+        
         <div id="noResults"></div>
-
-        <%--Results--%>
+        
         <div id="divResults" class="row marginTop-lg" style="display:none;">    
             <div class="container-fluid">
-
-                <%--Place content here--%>
-
+                <!-- Place content here -->
             </div>    
         </div>
 

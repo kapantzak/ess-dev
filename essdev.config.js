@@ -3,6 +3,7 @@ module.exports = {
   formFilters: true,
   asyncHandler: true,
   stateHelper: true,
+  buttons: true,
   filters: {
     groups: [
       {
