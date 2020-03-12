@@ -1,6 +1,6 @@
 {
   "name": "ess-dev",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Biolerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
