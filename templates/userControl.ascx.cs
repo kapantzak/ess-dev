@@ -124,9 +124,10 @@ namespace eStudio
         {
             {{# if answers.userControlHelper}}
             {{#each userControlHelper.mainData.storedProc.params}}
-            var {{this.paramName}} = null;
+            var {{this.paramName}} = null;            
             {{/each}}
-
+            
+            {{#unless answers.formFilters}}
             Data data = null;
             try
             {
@@ -137,8 +138,9 @@ namespace eStudio
                 this.ToggleAccessMessage(true, ex.Message);
                 return null;
             }
-            {{/if}}
 
+            {{/unless}}
+            {{/if}}
             {{#if answers.formFilters}}
             Datasources datasources = null;
             try
@@ -150,8 +152,8 @@ namespace eStudio
                 this.ToggleAccessMessage(true, ex.Message);
                 return null;
             }
-            {{/if}}
 
+            {{/if}}
             return new State
             {
                 CurrentUserContactID = this.sp.eUser.User.ContactID,
@@ -160,8 +162,10 @@ namespace eStudio
                 {{#if answers.formFilters}}
                 Datasources = datasources,
                 {{else}}
-                {{# if answers.userControlHelper}}
+                {{#if answers.userControlHelper}}
+                {{#unless answers.formFilters}}
                 Data = data
+                {{/unless}}
                 {{/if}}
                 {{/if}}
             };
