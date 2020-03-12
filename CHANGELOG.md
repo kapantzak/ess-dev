@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [v2.3.5] - 2020-03-12
+### Added
+- Repository
+
 ## [v2.3.4] - 2020-03-12
 ### Added
 - StickyHeader
@@ -50,6 +54,7 @@
 
 
 [Unreleased]: https://github.com/kapantzak/ess-dev/compare/master...develop
+[v2.3.5]: https://github.com/kapantzak/ess-dev/compare/v2.3.4...v2.3.5
 [v2.3.4]: https://github.com/kapantzak/ess-dev/compare/v2.3.3...v2.3.4
 [v2.3.3]: https://github.com/kapantzak/ess-dev/compare/v2.3.2...v2.3.3
 [v2.3.2]: https://github.com/kapantzak/ess-dev/compare/v2.3.1...v2.3.2

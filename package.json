@@ -18,6 +18,10 @@
   ],
   "author": "John Kapantzakis",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kapantzak/ess-dev.git"
+  },
   "private": false,
   "keywords": [
     "node",
