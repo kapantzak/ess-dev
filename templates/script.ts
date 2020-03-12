@@ -16,6 +16,9 @@ import { parseDecodedJSON } from '../helpers/htmlHelper';
 {{#if answers.formFilters}}
 import { Filters, FiltersGroup, IFiltersApplyEvent } from '../helpers/filtersApi/filters';
 {{/if}}
+{{#if answers.buttons}}
+import { StickyHeader } from '../helpers/stickyHeader/stickyHeader';
+{{/if}}
 {{#if answers.asyncHandler}}
 import { {{asyncHelper.className}} } from '../asyncHelpers/{{asyncHelper.import_name}}';
 import { IAsyncResponse, AsyncResponseStatus } from '../asyncHelpers/generalAsyncHelper';
@@ -40,6 +43,9 @@ function initApp(): void {
     {{/if}}
   }
   {{/if}}
+  {{#if answers.buttons}}
+  initStickyHeader();
+  {{/if}}
 }
 
 {{#if answers.stateHelper}}
@@ -59,6 +65,15 @@ function setInitialState(): boolean {
   }
   return false;
 }
+{{/if}}
+
+{{#if answers.buttons}}
+function initStickyHeader(): void {
+  new StickyHeader($('#stickyButtons'), {
+      boundToElement: $('#divButtonsHolder'),
+      boundToElementScrollBuffer: 100
+  });
+};
 {{/if}}
 
 {{#if answers.formFilters}}
