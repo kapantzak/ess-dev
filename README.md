@@ -42,6 +42,9 @@ Initialize a new form. Adds various files, depending on the options provided
 - The project file name
 - A JSON with the items to be included
 
+### --msbuildextensionspath (Alias -b)
+`string` Path to `MSBuildExtensionsPath32`
+
 ## Configuration file
 
 If `essdev.config.js` exists in the root folder, the tool will try to read form it and **will not ask any questions**.

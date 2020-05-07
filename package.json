@@ -1,6 +1,6 @@
 {
   "name": "ess-dev",
-  "version": "2.3.6",
+  "version": "2.4.0",
   "description": "Boilerplate code for ess forms development",
   "main": "index.js",
   "scripts": {
